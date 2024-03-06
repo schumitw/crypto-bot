@@ -28,10 +28,3 @@ jobs:
           git add .
           git commit -am "Update NostalgiaForInfinityX/NostalgiaForInfinityX4 Strategy"
           git push
-      - name: Notify Telegram
-        uses: appleboy/telegram-action@master
-        if: steps.git-check.outputs.modified == 'true'
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: Config Files updated.
