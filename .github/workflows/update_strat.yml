@@ -11,6 +11,8 @@ jobs:
         run: |
           curl -O https://raw.githubusercontent.com/iterativv/NostalgiaForInfinity/main/NostalgiaForInfinityX.py && \
           mv NostalgiaForInfinityX.py user_data/strategies
+          curl -O https://raw.githubusercontent.com/iterativv/NostalgiaForInfinity/main/NostalgiaForInfinityX4.py && \
+          mv NostalgiaForInfinityX4.py user_data/strategies
           curl -O https://raw.githubusercontent.com/iterativv/NostalgiaForInfinity/main/configs/blacklist-binance.json && \
           mv blacklist-binance.json user_data/strategies/NostalgiaForInfinityX
           curl -O https://raw.githubusercontent.com/iterativv/NostalgiaForInfinity/main/configs/pairlist-volume-binance-usdt.json && \
@@ -24,7 +26,7 @@ jobs:
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
           git add .
-          git commit -am "Update NostalgiaForInfinityX Strategy"
+          git commit -am "Update NostalgiaForInfinityX/NostalgiaForInfinityX4 Strategy"
           git push
       - name: Notify Telegram
         uses: appleboy/telegram-action@master
