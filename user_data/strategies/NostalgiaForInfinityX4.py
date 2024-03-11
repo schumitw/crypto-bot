@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.325"
+    return "v14.1.326"
 
   stoploss = -0.99
 
@@ -156,6 +156,7 @@ class NostalgiaForInfinityX4(IStrategy):
   is_futures_mode = False
   futures_mode_leverage = 3.0
   futures_mode_leverage_rebuy_mode = 3.0
+  futures_mode_leverage_grind_mode = 5.0
 
   # Stop thresholds. 0: Doom Bull, 1: Doom Bear, 2: u_e Bull, 3: u_e Bear, 4: u_e mins Bull, 5: u_e mins Bear.
   # 6: u_e ema % Bull, 7: u_e ema % Bear, 8: u_e RSI diff Bull, 9: u_e RSI diff Bear.
@@ -36716,6 +36717,12 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["ema_200_dec_4_1d"] == False)
             | (df["hl_pct_change_6_1d"] > 0.20)
           )
+          long_entry_logic.append(
+            (df["not_downtrend_4h"])
+            | (df["ema_200_dec_48_1h"] == False)
+            | (df["ema_200_dec_4_1d"] == False)
+            | (df["hl_pct_change_6_1d"] > 0.25)
+          )
 
           # Logic
           long_entry_logic.append(df["rsi_14"] < self.entry_46_rsi_14_max.value)
@@ -38223,6 +38230,8 @@ class NostalgiaForInfinityX4(IStrategy):
     enter_tags = entry_tag.split()
     if all(c in self.long_rebuy_mode_tags for c in enter_tags):
       return self.futures_mode_leverage_rebuy_mode
+    elif all(c in self.long_grind_mode_tags for c in enter_tags):
+      return self.futures_mode_leverage_grind_mode
     return self.futures_mode_leverage
 
   def _set_profit_target(
