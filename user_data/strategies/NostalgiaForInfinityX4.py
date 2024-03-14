@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.339"
+    return "v14.1.341"
 
   stoploss = -0.99
 
@@ -16024,7 +16024,7 @@ class NostalgiaForInfinityX4(IStrategy):
           grind_1_current_grind_stake_profit
           < (slice_amount * grind_1_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
         )
-        and (is_derisk or is_derisk_calc)
+        and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
       and (
@@ -16156,7 +16156,7 @@ class NostalgiaForInfinityX4(IStrategy):
           grind_2_current_grind_stake_profit
           < (slice_amount * grind_2_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
         )
-        and (is_derisk or is_derisk_calc)
+        and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
       and (
@@ -16288,7 +16288,7 @@ class NostalgiaForInfinityX4(IStrategy):
           grind_3_current_grind_stake_profit
           < (slice_amount * grind_3_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
         )
-        and (is_derisk or is_derisk_calc)
+        and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
       and (
@@ -16420,7 +16420,7 @@ class NostalgiaForInfinityX4(IStrategy):
           grind_4_current_grind_stake_profit
           < (slice_amount * grind_4_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
         )
-        and (is_derisk or is_derisk_calc)
+        and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
       and (
@@ -36899,10 +36899,11 @@ class NostalgiaForInfinityX4(IStrategy):
           )
           long_entry_logic.append(
             (df["rsi_14_4h"] < 40.0)
+            | (df["cti_20_1d"] < 0.7)
+            | (df["rsi_14_1d"] < 40.0)
             | (df["rsi_14_max_6_1d"] < 70.0)
-            | (df["r_480_1h"] < -30.0)
+            | (df["r_480_1h"] < -40.0)
             | (df["r_480_4h"] < -30.0)
-            | (df["close"] > df["sup_level_4h"])
           )
 
           # Logic
