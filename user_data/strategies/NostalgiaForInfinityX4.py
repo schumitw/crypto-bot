@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.351"
+    return "v14.1.352"
 
   stoploss = -0.99
 
@@ -16492,7 +16492,7 @@ class NostalgiaForInfinityX4(IStrategy):
           f"De-risk (dd0) [{current_time}] [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_1_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
         )
         order_tag = "dd0"
-        for grind_entry_id in grind_1_buy_orders:
+        for grind_entry_id in grind_1_buy_orders + grind_2_buy_orders + grind_3_buy_orders + grind_4_buy_orders:
           order_tag += " " + str(grind_entry_id)
         if has_order_tags:
           return -sell_amount, order_tag
@@ -26256,6 +26256,16 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_4h"] < 0.5)
         | (df["rsi_14_4h"] < 50.0)
         | (df["rsi_14_max_6_4h"] < 70.0)
+      )
+      & (
+        (df["change_pct_1h"] > -0.02)
+        | (df["not_downtrend_1h"])
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["cti_20_4h"] < 0.5)
+        | (df["rsi_14_4h"] < 60.0)
+        | (df["r_480_1h"] < -25.0)
+        | (df["r_480_4h"] < -10.0)
       )
     )
 
