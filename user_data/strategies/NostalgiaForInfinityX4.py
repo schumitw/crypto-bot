@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.402"
+    return "v14.1.403"
 
   stoploss = -0.99
 
@@ -481,7 +481,7 @@ class NostalgiaForInfinityX4(IStrategy):
     [-0.03, -0.10, -0.12, -0.14, -0.16, -0.18],
   ]
   regular_mode_grind_4_profit_threshold_spot = 0.018
-  regular_mode_derisk_spot = -0.20
+  regular_mode_derisk_spot = -0.30
   regular_mode_derisk_spot_old = -0.80
 
   regular_mode_rebuy_stakes_futures = [
@@ -26545,6 +26545,15 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_4h"] < 0.5)
         | (df["rsi_14_4h"] < 50.0)
         | (df["close"] < df["res_hlevel_4h"])
+      )
+      & (
+        (df["not_downtrend_1h"])
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3_15m"] > 10.0)
+        | (df["rsi_3_1h"] > 12.0)
+        | (df["cti_20_1d"] < 0.8)
+        | (df["rsi_14_1d"] < 70.0)
       )
     )
 
