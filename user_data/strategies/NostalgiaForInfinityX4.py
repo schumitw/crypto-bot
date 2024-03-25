@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.416"
+    return "v14.1.417"
 
   stoploss = -0.99
 
@@ -1798,6 +1798,10 @@ class NostalgiaForInfinityX4(IStrategy):
       self.regular_mode_stake_multiplier_spot = self.config["regular_mode_stake_multiplier_spot"]
     if "regular_mode_stake_multiplier_futures" in self.config:
       self.regular_mode_stake_multiplier_futures = self.config["regular_mode_stake_multiplier_futures"]
+    if "regular_mode_derisk_spot" in self.config:
+      self.regular_mode_derisk_spot = self.config["regular_mode_derisk_spot"]
+    if "regular_mode_derisk_futures" in self.config:
+      self.regular_mode_derisk_futures = self.config["regular_mode_derisk_futures"]
     if "grind_mode_coins" in self.config:
       self.grind_mode_coins = self.config["grind_mode_coins"]
     if "max_slippage" in self.config:
@@ -17076,7 +17080,7 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["rsi_3_15m"] > 30.0)
           and (last_candle["rsi_3_1h"] > 30.0)
           and (last_candle["rsi_3_4h"] > 30.0)
-          and (last_candle["rsi_14"] < 46.0)
+          and (last_candle["rsi_14"] < 42.0)
           and (last_candle["rsi_14_1d"] < 70.0)
           and (last_candle["close"] > last_candle["sup_level_1h"])
           and (last_candle["close"] > last_candle["sup_level_4h"])
@@ -18066,8 +18070,8 @@ class NostalgiaForInfinityX4(IStrategy):
     # Indicators
     # -----------------------------------------------------------------------------------------
     # RSI
-    informative_1d["rsi_3"] = pta.rsi(informative_1d["close"], length=3)
-    informative_1d["rsi_14"] = pta.rsi(informative_1d["close"], length=14)
+    informative_1d["rsi_3"] = pta.rsi(informative_1d["close"], length=3, fillna=0.0)
+    informative_1d["rsi_14"] = pta.rsi(informative_1d["close"], length=14, fillna=0.0)
 
     informative_1d["rsi_14_max_6"] = informative_1d["rsi_14"].rolling(6).max()
 
@@ -18167,8 +18171,8 @@ class NostalgiaForInfinityX4(IStrategy):
     # Indicators
     # -----------------------------------------------------------------------------------------
     # RSI
-    informative_4h["rsi_3"] = pta.rsi(informative_4h["close"], length=3)
-    informative_4h["rsi_14"] = pta.rsi(informative_4h["close"], length=14)
+    informative_4h["rsi_3"] = pta.rsi(informative_4h["close"], length=3, fillna=0.0)
+    informative_4h["rsi_14"] = pta.rsi(informative_4h["close"], length=14, fillna=0.0)
 
     informative_4h["rsi_14_max_3"] = informative_4h["rsi_14"].rolling(3).max()
     informative_4h["rsi_14_max_6"] = informative_4h["rsi_14"].rolling(6).max()
@@ -18263,8 +18267,8 @@ class NostalgiaForInfinityX4(IStrategy):
     # Indicators
     # -----------------------------------------------------------------------------------------
     # RSI
-    informative_1h["rsi_3"] = pta.rsi(informative_1h["close"], length=3)
-    informative_1h["rsi_14"] = pta.rsi(informative_1h["close"], length=14)
+    informative_1h["rsi_3"] = pta.rsi(informative_1h["close"], length=3, fillna=0.0)
+    informative_1h["rsi_14"] = pta.rsi(informative_1h["close"], length=14, fillna=0.0)
 
     # EMA
     informative_1h["ema_12"] = ta.EMA(informative_1h, timeperiod=12)
