@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.415"
+    return "v14.1.416"
 
   stoploss = -0.99
 
@@ -16964,7 +16964,7 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["rsi_3_15m"] > 20.0)
           and (last_candle["rsi_3_1h"] > 20.0)
           and (last_candle["rsi_3_4h"] > 20.0)
-          and (last_candle["rsi_14"] < 46.0)
+          and (last_candle["rsi_14"] < 44.0)
           and (last_candle["ha_close"] > last_candle["ha_open"])
           and (last_candle["ema_12"] < (last_candle["ema_26"] * 0.990))
           and (last_candle["cti_20_1h"] < 0.8)
@@ -17078,6 +17078,9 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["rsi_3_4h"] > 30.0)
           and (last_candle["rsi_14"] < 46.0)
           and (last_candle["rsi_14_1d"] < 70.0)
+          and (last_candle["close"] > last_candle["sup_level_1h"])
+          and (last_candle["close"] > last_candle["sup_level_4h"])
+          and (last_candle["close"] > last_candle["sup_level_1d"])
           and (last_candle["not_downtrend_1h"] == True)
           and (last_candle["not_downtrend_4h"] == True)
           and (last_candle["not_downtrend_1d"] == True)
@@ -17087,7 +17090,7 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["rsi_3_15m"] > 30.0)
           and (last_candle["rsi_3_1h"] > 30.0)
           and (last_candle["rsi_3_4h"] > 30.0)
-          and (last_candle["rsi_14"] < 46.0)
+          and (last_candle["rsi_14"] < 44.0)
           and (last_candle["ha_close"] > last_candle["ha_open"])
           and (last_candle["close"] < last_candle["res_hlevel_4h"])
           and (last_candle["close"] > last_candle["sup_level_4h"])
@@ -34104,7 +34107,6 @@ class NostalgiaForInfinityX4(IStrategy):
         # Condition #25 - Pump mode (Long).
         if index == 25:
           # Protections
-          long_entry_logic.append(df["protections_long_global"] == True)
           long_entry_logic.append(df["global_protections_long_pump"] == True)
           long_entry_logic.append(df["global_protections_long_dump"] == True)
           long_entry_logic.append(df["btc_pct_close_max_24_5m"] < 0.03)
