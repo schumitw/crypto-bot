@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.432"
+    return "v14.1.434"
 
   stoploss = -0.99
 
@@ -32390,6 +32390,14 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["rsi_3_15m"] > 20.0)
             | (df["close"] > df["sup_level_1h"])
           )
+          long_entry_logic.append(
+            (df["rsi_14"] > df["rsi_14"].shift(12))
+            | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+            | (df["rsi_3_15m"] > 20.0)
+            | (df["rsi_14_4h"] < 70.0)
+            | (df["ema_200_dec_48_1h"] == False)
+            | (df["ema_200_dec_4_1d"] == False)
+          )
 
           # Logic
           long_entry_logic.append(df["ema_26"] > df["ema_12"])
@@ -39611,6 +39619,7 @@ class NostalgiaForInfinityX4(IStrategy):
           # Protections
           long_entry_logic.append(num_open_grind_mode < self.grind_mode_max_slots)
           long_entry_logic.append(is_pair_grind_mode)
+          long_entry_logic.append(df["protections_long_global"] == True)
           long_entry_logic.append(df["global_protections_long_pump"] == True)
           long_entry_logic.append(df["global_protections_long_dump"] == True)
           long_entry_logic.append(df["protections_long_rebuy"] == True)
@@ -39629,8 +39638,8 @@ class NostalgiaForInfinityX4(IStrategy):
           long_entry_logic.append(df["hl_pct_change_48_1h"] < 0.60)
           long_entry_logic.append(df["num_empty_288"] < allowed_empty_candles)
 
-          long_entry_logic.append(df["rsi_3"] >= 12.0)
-          long_entry_logic.append(df["rsi_3"] <= 50.0)
+          long_entry_logic.append(df["rsi_3"] >= 30.0)
+          long_entry_logic.append(df["rsi_3"] <= 60.0)
           long_entry_logic.append(df["rsi_3_15m"] >= 30.0)
           long_entry_logic.append(df["rsi_3_1h"] >= 30.0)
           long_entry_logic.append(df["rsi_3_4h"] >= 30.0)
@@ -39645,7 +39654,7 @@ class NostalgiaForInfinityX4(IStrategy):
           long_entry_logic.append(df["ema_200_dec_4_1d"] == False)
 
           # Logic
-          long_entry_logic.append(df["rsi_14"] < 40.0)
+          long_entry_logic.append(df["rsi_14"] < 42.0)
           long_entry_logic.append(df["ema_12"] < df["ema_26"])
           long_entry_logic.append(df["ha_close"] > df["ha_open"])
 
