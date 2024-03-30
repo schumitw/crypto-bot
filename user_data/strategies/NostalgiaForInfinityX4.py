@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.457"
+    return "v14.1.458"
 
   stoploss = -0.99
 
@@ -18742,6 +18742,9 @@ class NostalgiaForInfinityX4(IStrategy):
     informative_1h["rsi_3"] = pta.rsi(informative_1h["close"], length=3, fillna=0.0)
     informative_1h["rsi_14"] = pta.rsi(informative_1h["close"], length=14, fillna=0.0)
 
+    informative_1h["rsi_14_max_3"] = informative_1h["rsi_14"].rolling(3).max()
+    informative_1h["rsi_14_max_6"] = informative_1h["rsi_14"].rolling(6).max()
+
     # EMA
     informative_1h["ema_12"] = ta.EMA(informative_1h, timeperiod=12)
     informative_1h["ema_26"] = ta.EMA(informative_1h, timeperiod=26)
@@ -28467,6 +28470,17 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["close"] < df["res_hlevel_1d"])
         | (df["ema_200_dec_4_1d"] == False)
         | (df["hl_pct_change_6_1d"] < 0.9)
+      )
+      & (
+        (df["change_pct_1h"] > -0.01)
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3_15m"] > 30.0)
+        | (df["rsi_14_1h"] < 50.0)
+        | (df["rsi_14_max_6_1h"] < 70.0)
+        | (df["r_480_1h"] > -70.0)
+        | (df["r_480_4h"] > -70.0)
+        | (df["ema_200_dec_48_1h"] == False)
+        | (df["ema_200_dec_24_4h"] == False)
       )
     )
 
