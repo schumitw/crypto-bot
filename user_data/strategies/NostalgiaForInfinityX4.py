@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.479"
+    return "v14.1.480"
 
   stoploss = -0.99
 
@@ -17237,8 +17237,6 @@ class NostalgiaForInfinityX4(IStrategy):
         sell_amount = (trade.amount * exit_rate / (trade.leverage if self.is_futures_mode else 1.0)) - (
           min_stake * 1.7
         )
-      if (trade.stake_amount - sell_amount) < (min_stake * 1.55):
-        sell_amount = trade.stake_amount - (min_stake * 1.55)
       if sell_amount > min_stake:
         self.dp.send_msg(
           f"De-risk (dd0) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_1_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
@@ -18331,8 +18329,6 @@ class NostalgiaForInfinityX4(IStrategy):
         sell_amount = (trade.amount * exit_rate / (trade.leverage if self.is_futures_mode else 1.0)) - (
           min_stake * 1.7
         )
-      if (trade.stake_amount - sell_amount) < (min_stake * 1.55):
-        sell_amount = trade.stake_amount - (min_stake * 1.55)
       if sell_amount > min_stake:
         grind_profit = 0.0
         self.dp.send_msg(
@@ -38936,6 +38932,15 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["rsi_14_1h"] < 40.0)
             | (df["rsi_14_4h"] < 40.0)
             | (df["rsi_14_1d"] < 40.0)
+          )
+          long_entry_logic.append(
+            (df["rsi_14_1h"] < 40.0)
+            | (df["rsi_14_4h"] < 40.0)
+            | (df["rsi_14_1d"] < 40.0)
+            | (df["r_480_1h"] > -70.0)
+            | (df["close"] < df["res_hlevel_1h"])
+            | (df["ema_200_dec_48_1h"] == False)
+            | (df["hl_pct_change_6_1d"] > 0.20)
           )
 
           # Logic
