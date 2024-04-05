@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.509"
+    return "v14.1.510"
 
   stoploss = -0.99
 
@@ -10528,7 +10528,7 @@ class NostalgiaForInfinityX4(IStrategy):
     current_time: "datetime",
     buy_tag,
   ) -> tuple:
-    if last_candle["close"] < last_candle["sma_200_1h"]:
+    if last_candle["close"] < last_candle["sma_200"]:
       if 0.01 > current_profit >= 0.001:
         if last_candle["rsi_14"] > 90.0:
           return True, f"exit_{mode_name}_o_0"
@@ -10568,7 +10568,7 @@ class NostalgiaForInfinityX4(IStrategy):
       elif current_profit >= 0.2:
         if last_candle["rsi_14"] > 58.0:
           return True, f"exit_{mode_name}_o_12"
-    elif last_candle["close"] > last_candle["sma_200_1h"]:
+    elif last_candle["close"] > last_candle["sma_200"]:
       if 0.01 > current_profit >= 0.001:
         if last_candle["rsi_14"] > 88.0:
           return True, f"exit_{mode_name}_u_0"
@@ -17332,13 +17332,13 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.88))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.86))
-          and (last_candle["close"] > (last_candle["high_max_6_1d"] * 0.84))
-          and (last_candle["close"] > (last_candle["high_max_12_1d"] * 0.82))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.90))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.88))
+          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.86))
+          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.84))
+          and (last_candle["close"] > (last_candle["high_max_6_1d"] * 0.76))
+          and (last_candle["close"] > (last_candle["high_max_12_1d"] * 0.70))
         )
         and (
           (last_candle["rsi_3"] > 30.0)
