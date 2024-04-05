@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.514"
+    return "v14.1.515"
 
   stoploss = -0.99
 
@@ -18948,8 +18948,10 @@ class NostalgiaForInfinityX4(IStrategy):
     # ZL MA
     informative_4h["zlma_50"] = pta.zlma(informative_4h["close"], length=50, mamode="ema", offset=0, fillna=0.0)
 
-    informative_4h["zlma_50_dec"] = (informative_4h["zlma_50"].isnull()) | (
-      informative_4h["zlma_50"] <= informative_4h["zlma_50"].shift(1)
+    informative_4h["zlma_50_dec"] = (
+      (informative_4h["zlma_50"].isnull())
+      | (informative_4h["zlma_50"].eq(0.0))
+      | (informative_4h["zlma_50"] <= informative_4h["zlma_50"].shift(1))
     )
 
     # Williams %R
@@ -19061,8 +19063,10 @@ class NostalgiaForInfinityX4(IStrategy):
     # ZL MA
     informative_1h["zlma_50"] = pta.zlma(informative_1h["close"], length=50, mamode="ema", offset=0, fillna=0.0)
 
-    informative_1h["zlma_50_dec"] = (informative_1h["zlma_50"].isnull()) | (
-      informative_1h["zlma_50"] <= informative_1h["zlma_50"].shift(1)
+    informative_1h["zlma_50_dec"] = (
+      (informative_1h["zlma_50"].isnull())
+      | (informative_1h["zlma_50"].eq(0.0))
+      | (informative_1h["zlma_50"] <= informative_1h["zlma_50"].shift(1))
     )
 
     # BB
@@ -26022,7 +26026,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_1d"] < 0.5)
         | (df["rsi_14_1d"] < 46.0)
         | (df["close"] > df["sup_level_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["ema_200_dec_48_1h"] == False)
       )
       # 1d downtrend, 15m & 1d downmove, 15m & 1h & 4h still high, 1h downtrend
@@ -26146,7 +26150,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 70.0)
         | (df["r_480_1h"] < -25.0)
         | (df["r_480_4h"] < -20.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["bb20_2_low_15m"])
       )
       # 4h downtrend, 5m downmove, 15m & 1h & 4h & 1d still high, 1h downtrend
@@ -26160,7 +26164,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 40.0)
         | (df["cti_20_1d"] < 0.5)
         | (df["rsi_14_1d"] < 50.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["sup_level_1h"])
         | (df["ema_200_dec_48_1h"] == False)
@@ -26178,7 +26182,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 46.0)
         | (df["cti_20_1d"] < 0.5)
         | (df["rsi_14_1d"] < 50.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
       )
       # 1h downtrend, 5m downmove, 5m & 15m & 1h still high, 1h low, 1h downtrend
@@ -26190,7 +26194,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1h"] < 40.0)
         | (df["r_480_1h"] > -85.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_4h"])
         | (df["ema_200_dec_48_1h"] == False)
       )
@@ -26205,7 +26209,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 40.0)
         | (df["cti_20_1d"] < 0.5)
         | (df["rsi_14_1d"] < 46.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
       )
@@ -26235,7 +26239,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 46.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
       )
@@ -26249,7 +26253,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 40.0)
         | (df["rsi_14_1d"] < 46.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["ema_200_dec_4_1d"] == False)
       )
       # 1h downtrend, 1h downmove, 1h & 4h & 1d still high, 1h & 4h high
@@ -26262,7 +26266,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["r_480_1h"] < -20.0)
         | (df["r_480_4h"] < -20.0)
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
       )
       # 1h & 4h downtrend, 5m & 15m & 1h & 4h downmove, 1h & 4h & 1d still high
@@ -26278,7 +26282,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 50.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
       )
@@ -26293,7 +26297,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 50.0)
         | (df["cti_20_1d"] < 0.5)
         | (df["rsi_14_1d"] < 50.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
       )
       # 1h & 1d downtrend, 15m & 1h downmove, 15m & 1h & 4h still high, 1h low, 1h & 4h downtrend
@@ -26322,7 +26326,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_4h"] < 0.5)
         | (df["rsi_14_4h"] < 50.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
       )
       # 1h & 1d downtrend, 15m & 1h downmove, 5m & 15m & 1h & 4h still high, 1h downtrend
       & (
@@ -26335,7 +26339,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_1h"] < 0.5)
         | (df["rsi_14_1h"] < 40.0)
         | (df["rsi_14_4h"] < 46.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["ema_200_dec_48_1h"] == False)
       )
       # current 4h red, previous 4h green, 1h downtrend, 1h downmove, 5m & 15m & 1h & 4h & 1d still high
@@ -26351,7 +26355,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 46.0)
         | (df["rsi_14_max_6_4h"] < 70.0)
         | (df["rsi_14_1d"] < 46.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
       )
       # 1h & 1d downtrend, 1h & 4h & 1d downmove, 15m still high, 1h & 4h & 1d downtrend
       & (
@@ -26377,7 +26381,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 70.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["hl_pct_change_6_1d"] < 0.9)
       )
@@ -26389,7 +26393,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_3_1h"] > 20.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
         | (df["ema_200_dec_48_1h"] == False)
@@ -26421,7 +26425,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_1d"] < 0.8)
         | (df["rsi_14_1d"] < 50.0)
         | (df["r_480_1h"] < -30.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
       )
@@ -26437,7 +26441,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 40.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
       )
@@ -26454,7 +26458,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 60.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
       )
       # current 1d red, current 4h green, 1d downtrend, 15m downmove, 15m & 1h still high, 1h downtrend, drop in last 6 days
@@ -26482,7 +26486,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_1d"] < 0.5)
         | (df["rsi_14_1d"] < 50.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["hl_pct_change_6_1d"] < 0.5)
       )
@@ -26496,7 +26500,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_3_1h"] > 30.0)
         | (df["r_480_4h"] > -85.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
         | (df["ema_200_dec_24_4h"] == False)
@@ -26512,7 +26516,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 40.0)
         | (df["rsi_14_1d"] < 50.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
         | (df["hl_pct_change_6_1d"] < 0.8)
@@ -26530,7 +26534,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 60.0)
         | (df["r_480_1h"] < -30.0)
         | (df["r_480_4h"] < -15.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
       )
       # current 4h red, previous 4h green, 5m & 1hm downmove, 15m & 1h & 4h & 1d still high
@@ -26545,7 +26549,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 46.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
       )
@@ -26604,7 +26608,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_1d"] < 70.0)
         | (df["r_480_4h"] < -30.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
         | (df["hl_pct_change_6_1d"] < 0.9)
@@ -26623,7 +26627,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_1d"] < 0.8)
         | (df["rsi_14_1d"] < 60.0)
         | (df["close"] > df["bb20_2_low_15m"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_4h"])
       )
       # current 1d red, current 1h red, previous 1h green, 5m & 15m downmove, 15m & 1h & 1d still high, 1d downtrend
@@ -26636,7 +26640,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_15m"] < 36.0)
         | (df["rsi_14_1h"] < 40.0)
         | (df["rsi_14_1d"] < 46.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
         | (df["ema_200_dec_4_1d"] == False)
@@ -26651,7 +26655,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["r_480_1h"] > -95.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
         | (df["ema_200_dec_48_1h"] == False)
@@ -26668,7 +26672,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 40.0)
         | (df["close"] > df["bb20_2_low_15m"])
         | (df["close"] > df["bb20_2_low_1h"])
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
         | (df["ema_200_dec_48_1h"] == False)
@@ -26685,7 +26689,7 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["cti_20_1d"] < 0.8)
         | (df["rsi_14_1d"] < 50.0)
         | (df["r_480_4h"] < -30.0)
-        | (df["close"] > df["zlma_50_1h"])
+        | ((pd.notna(df["zlma_50_1h"])) & (df["close"] > df["zlma_50_1h"]))
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
       )
