@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.506"
+    return "v14.1.508"
 
   stoploss = -0.99
 
@@ -556,7 +556,7 @@ class NostalgiaForInfinityX4(IStrategy):
     [-0.03, -0.10, -0.12, -0.14, -0.16, -0.18],
   ]
   regular_mode_grind_5_profit_threshold_spot = 0.048
-  regular_mode_derisk_1_spot = -0.06
+  regular_mode_derisk_1_spot = -0.08
   regular_mode_derisk_1_reentry_spot = -0.06
   regular_mode_derisk_spot = -0.40
   regular_mode_derisk_spot_old = -0.80
@@ -686,7 +686,7 @@ class NostalgiaForInfinityX4(IStrategy):
     [-0.03, -0.10, -0.12, -0.14, -0.16, -0.18],
   ]
   regular_mode_grind_5_profit_threshold_futures = 0.048
-  regular_mode_derisk_1_futures = -0.18
+  regular_mode_derisk_1_futures = -0.24
   regular_mode_derisk_1_reentry_futures = -0.06  # without leverage
   regular_mode_derisk_futures = -0.60
   regular_mode_derisk_futures_old = -2.40
@@ -3596,7 +3596,7 @@ class NostalgiaForInfinityX4(IStrategy):
     current_time: "datetime",
     buy_tag,
   ) -> tuple:
-    if last_candle["close"] > last_candle["sma_200_1h"]:
+    if last_candle["close"] > last_candle["sma_200"]:
       if 0.01 > current_profit >= 0.001:
         if last_candle["rsi_14"] < 10.0:
           return True, f"exit_{mode_name}_o_0"
