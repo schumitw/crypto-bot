@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.521"
+    return "v14.1.523"
 
   stoploss = -0.99
 
@@ -1027,7 +1027,7 @@ class NostalgiaForInfinityX4(IStrategy):
   entry_24_r_14_max = DecimalParameter(-100.0, 80.0, default=-97.0, decimals=0, space="buy", optimize=True)
   entry_24_ewo_50_200_min = DecimalParameter(2.0, 10.0, default=7.0, decimals=1, space="buy", optimize=True)
   entry_24_ewo_50_200_max = DecimalParameter(10.0, 30.0, default=24.0, decimals=1, space="buy", optimize=True)
-  entry_24_sma_offset = DecimalParameter(0.960, 0.999, default=0.984, decimals=3, space="buy", optimize=True)
+  entry_24_sma_offset = DecimalParameter(0.960, 0.999, default=0.978, decimals=3, space="buy", optimize=True)
 
   entry_25_close_max_12 = DecimalParameter(00.50, 0.95, default=0.80, decimals=2, space="buy", optimize=False)
   entry_25_close_max_24 = DecimalParameter(00.50, 0.95, default=0.75, decimals=2, space="buy", optimize=False)
@@ -28169,6 +28169,18 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 60.0)
         | (df["r_480_1h"] < -35.0)
         | (df["r_480_4h"] < -25.0)
+        | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
+      )
+      & (
+        (df["not_downtrend_15m"])
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3"] > 20.0)
+        | (df["rsi_3_15m"] > 20.0)
+        | (df["cti_20_1h"] < 0.8)
+        | (df["rsi_14_1h"] < 70.0)
+        | (df["close"] < df["res_hlevel_1h"])
+        | (df["close"] < df["res_hlevel_4h"])
         | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
       )
     )
