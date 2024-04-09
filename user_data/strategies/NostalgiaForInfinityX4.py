@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.550"
+    return "v14.1.551"
 
   stoploss = -0.99
 
@@ -19399,10 +19399,10 @@ class NostalgiaForInfinityX4(IStrategy):
 
     # Williams %R
     informative_4h["r_14"] = pta.willr(
-      informative_4h["high"], informative_4h["low"], informative_4h["close"], lenght=14
+      informative_4h["high"], informative_4h["low"], informative_4h["close"], length=14
     )
     informative_4h["r_480"] = pta.willr(
-      informative_4h["high"], informative_4h["low"], informative_4h["close"], lenght=480
+      informative_4h["high"], informative_4h["low"], informative_4h["close"], length=480
     )
 
     # CTI
@@ -19531,10 +19531,10 @@ class NostalgiaForInfinityX4(IStrategy):
 
     # Williams %R
     informative_1h["r_14"] = pta.willr(
-      informative_1h["high"], informative_1h["low"], informative_1h["close"], lenght=14
+      informative_1h["high"], informative_1h["low"], informative_1h["close"], length=14
     )
     informative_1h["r_480"] = pta.willr(
-      informative_1h["high"], informative_1h["low"], informative_1h["close"], lenght=480
+      informative_1h["high"], informative_1h["low"], informative_1h["close"], length=480
     )
 
     # CTI
@@ -19784,8 +19784,8 @@ class NostalgiaForInfinityX4(IStrategy):
     df["bb40_2_tail"] = (df["close"] - df["bb40_2_low"]).abs()
 
     # Williams %R
-    df["r_14"] = pta.willr(df["high"], df["low"], df["close"], lenght=14)
-    df["r_480"] = pta.willr(df["high"], df["low"], df["close"], lenght=480)
+    df["r_14"] = pta.willr(df["high"], df["low"], df["close"], length=14)
+    df["r_480"] = pta.willr(df["high"], df["low"], df["close"], length=480)
 
     # CTI
     df["cti_20"] = pta.cti(df["close"], length=20)
@@ -29821,6 +29821,17 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_max_6_4h"] < 70.0)
         | (df["close"] > df["sup_level_1h"])
         | (df["ema_200_dec_48_1h"] == False)
+        | (df["ema_200_dec_24_4h"] == False)
+        | (df["ema_200_dec_4_1d"] == False)
+      )
+      & (
+        (df["change_pct_1h"] > -0.02)
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3_15m"] > 26.0)
+        | (df["rsi_14_1h"] < 50.0)
+        | (df["rsi_14_4h"] < 50.0)
+        | (df["r_480_4h"] > -80.0)
         | (df["ema_200_dec_24_4h"] == False)
         | (df["ema_200_dec_4_1d"] == False)
       )
