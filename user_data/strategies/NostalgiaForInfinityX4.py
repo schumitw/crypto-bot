@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.576"
+    return "v14.1.577"
 
   stoploss = -0.99
 
@@ -1870,8 +1870,12 @@ class NostalgiaForInfinityX4(IStrategy):
       self.regular_mode_stake_multiplier_spot = self.config["regular_mode_stake_multiplier_spot"]
     if "regular_mode_stake_multiplier_futures" in self.config:
       self.regular_mode_stake_multiplier_futures = self.config["regular_mode_stake_multiplier_futures"]
+    if "regular_mode_derisk_1_spot" in self.config:
+      self.regular_mode_derisk_1_spot = self.config["regular_mode_derisk_1_spot"]
     if "regular_mode_derisk_spot" in self.config:
       self.regular_mode_derisk_spot = self.config["regular_mode_derisk_spot"]
+    if "regular_mode_derisk_1_futures" in self.config:
+      self.regular_mode_derisk_1_futures = self.config["regular_mode_derisk_1_futures"]
     if "regular_mode_derisk_futures" in self.config:
       self.regular_mode_derisk_futures = self.config["regular_mode_derisk_futures"]
     if "grind_mode_max_slots" in self.config:
@@ -28476,6 +28480,17 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["rsi_14_4h"] < 50.0)
         | (df["rsi_14_1d"] < 60.0)
         | (df["close"] > df["sup_level_1h"])
+      )
+      & (
+        (df["change_pct_1d"] < 0.08)
+        | (df["top_wick_pct_1d"] < 0.08)
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3"] > 26.0)
+        | (df["rsi_14_15m"] < 36.0)
+        | (df["rsi_14_1h"] < 70.0)
+        | (df["rsi_14_4h"] < 70.0)
+        | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
       )
     )
 
