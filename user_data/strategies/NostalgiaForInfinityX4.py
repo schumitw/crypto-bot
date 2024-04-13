@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.590"
+    return "v14.1.591"
 
   stoploss = -0.99
 
@@ -20011,7 +20011,7 @@ class NostalgiaForInfinityX4(IStrategy):
 
     df.fillna({"zlma_50_1h": 0.0}, inplace=True)
     df.fillna({"cti_20_1d": 0.0}, inplace=True)
-    df.fillna({"r_480_4h": -50.0}, inplace=True)
+    df["r_480_4h"] = df["r_480_4h"].astype(np.float64).replace(to_replace=[np.nan, None], value=(-50.0))
 
     # Global protections
     df["protections_long_global"] = (
@@ -28513,6 +28513,18 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["r_480_4h"] < -25.0)
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
+      )
+      & (
+        (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3"] > 8.0)
+        | (df["rsi_14_1h"] < 60.0)
+        | (df["rsi_14_4h"] < 60.0)
+        | (df["rsi_14_1d"] < 60.0)
+        | (df["r_480_1h"] < -35.0)
+        | (df["close"] < df["res_hlevel_4h"])
+        | (df["close"] < df["res_hlevel_1d"])
+        | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
       )
     )
 
