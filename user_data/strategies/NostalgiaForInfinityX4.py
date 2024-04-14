@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.595"
+    return "v14.1.598"
 
   stoploss = -0.99
 
@@ -185,247 +185,55 @@ class NostalgiaForInfinityX4(IStrategy):
   grind_derisk_spot = -0.40
   grind_derisk_futures = -0.50
 
-  grind_1_stop_grinds_spot = -0.16
+  grind_1_stop_grinds_spot = -0.20
   grind_1_profit_threshold_spot = 0.018
-  grind_1_stakes_spot = [
-    [0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.3, 0.3, 0.3, 0.3],
-    [0.35, 0.35, 0.35, 0.35],
-    [0.4, 0.4, 0.4],
-    [0.45, 0.45, 0.45],
-    [0.5, 0.5, 0.5],
-    [0.75, 0.75],
-  ]
-  grind_1_sub_thresholds_spot = [
-    [-0.12, -0.14, -0.16, -0.18, -0.20],
-    [-0.12, -0.14, -0.16, -0.18],
-    [-0.12, -0.14, -0.16, -0.18],
-    [-0.12, -0.14, -0.16],
-    [-0.12, -0.14, -0.16],
-    [-0.12, -0.14, -0.16],
-    [-0.12, -0.14],
-  ]
+  grind_1_stakes_spot = [0.25, 0.25, 0.25]
+  grind_1_sub_thresholds_spot = [-0.06, -0.07, -0.08]
 
-  grind_1_stop_grinds_futures = -0.48
+  grind_1_stop_grinds_futures = -0.20
   grind_1_profit_threshold_futures = 0.018
-  grind_1_stakes_futures = [
-    [0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.3, 0.3, 0.3, 0.3],
-    [0.35, 0.35, 0.35, 0.35],
-    [0.4, 0.4, 0.4],
-    [0.45, 0.45, 0.45],
-    [0.5, 0.5, 0.5],
-    [0.75, 0.75],
-  ]
-  grind_1_sub_thresholds_futures = [
-    [-0.12, -0.14, -0.16, -0.18, -0.20],
-    [-0.12, -0.14, -0.16, -0.18],
-    [-0.12, -0.14, -0.16, -0.18],
-    [-0.12, -0.14, -0.16],
-    [-0.12, -0.14, -0.16],
-    [-0.12, -0.14, -0.16],
-    [-0.12, -0.14],
-  ]
+  grind_1_stakes_futures = [0.25, 0.25, 0.25]
+  grind_1_sub_thresholds_futures = [-0.06, -0.07, -0.08]
 
-  grind_2_stop_grinds_spot = -0.16
+  grind_2_stop_grinds_spot = -0.20
   grind_2_profit_threshold_spot = 0.018
-  grind_2_stakes_spot = [
-    [0.10, 0.15, 0.20, 0.25, 0.30],
-    [0.15, 0.20, 0.25, 0.30, 0.35],
-    [0.20, 0.25, 0.30, 0.35, 0.40],
-    [0.30, 0.35, 0.40, 0.45, 0.50],
-    [0.40, 0.45, 0.50, 0.55, 0.60],
-    [0.50, 0.55, 0.60, 0.65, 0.70],
-    [0.60, 0.65, 0.70, 0.75, 0.80],
-    [0.70, 0.75, 0.80, 0.85, 0.90],
-    [0.80, 0.85, 0.90, 0.95, 1.00],
-  ]
-  grind_2_sub_thresholds_spot = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-  ]
+  grind_2_stakes_spot = [0.15, 0.25, 0.30]
+  grind_2_sub_thresholds_spot = [-0.06, -0.07, -0.08]
 
-  grind_2_stop_grinds_futures = -0.48
+  grind_2_stop_grinds_futures = -0.20
   grind_2_profit_threshold_futures = 0.018
-  grind_2_stakes_futures = [
-    [0.10, 0.15, 0.20, 0.25, 0.30],
-    [0.15, 0.20, 0.25, 0.30, 0.35],
-    [0.20, 0.25, 0.30, 0.35, 0.40],
-    [0.30, 0.35, 0.40, 0.45, 0.50],
-    [0.40, 0.45, 0.50, 0.55, 0.60],
-    [0.50, 0.55, 0.60, 0.65, 0.70],
-    [0.60, 0.65, 0.70, 0.75, 0.80],
-    [0.70, 0.75, 0.80, 0.85, 0.90],
-    [0.80, 0.85, 0.90, 0.95, 1.00],
-  ]
-  grind_2_sub_thresholds_futures = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-    [-0.10, -0.12, -0.14, -0.16, -0.18],
-  ]
+  grind_2_stakes_futures = [0.15, 0.25, 0.30]
+  grind_2_sub_thresholds_futures = [-0.06, -0.07, -0.08]
 
-  grind_3_stop_grinds_spot = -0.16
+  grind_3_stop_grinds_spot = -0.20
   grind_3_profit_threshold_spot = 0.018
-  grind_3_stakes_spot = [
-    [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10],
-    [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-    [0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30],
-    [0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40],
-    [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50],
-    [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60],
-    [0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70],
-    [0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80],
-  ]
-  grind_3_sub_thresholds_spot = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-  ]
+  grind_3_stakes_spot = [0.20, 0.20, 0.20]
+  grind_3_sub_thresholds_spot = [-0.06, -0.07, -0.08]
 
-  grind_3_stop_grinds_futures = -0.48
+  grind_3_stop_grinds_futures = -0.20
   grind_3_profit_threshold_futures = 0.018
-  grind_3_stakes_futures = [
-    [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10],
-    [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-    [0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30],
-    [0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40],
-    [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50],
-    [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60],
-    [0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70],
-    [0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80],
-  ]
-  grind_3_sub_thresholds_futures = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-  ]
+  grind_3_stakes_futures = [0.20, 0.20, 0.20]
+  grind_3_sub_thresholds_futures = [-0.06, -0.07, -0.08]
 
-  grind_4_stop_grinds_spot = -0.16
+  grind_4_stop_grinds_spot = -0.20
   grind_4_profit_threshold_spot = 0.018
-  grind_4_stakes_spot = [
-    [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10],
-    [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-    [0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30],
-    [0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40],
-    [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50],
-    [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60],
-    [0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70],
-    [0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80],
-  ]
-  grind_4_sub_thresholds_spot = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-  ]
+  grind_4_stakes_spot = [0.20, 0.20, 0.20]
+  grind_4_sub_thresholds_spot = [-0.06, -0.07, -0.08]
 
-  grind_4_stop_grinds_futures = -0.48
+  grind_4_stop_grinds_futures = -0.20
   grind_4_profit_threshold_futures = 0.018
-  grind_4_stakes_futures = [
-    [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10],
-    [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-    [0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30],
-    [0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40],
-    [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50],
-    [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60],
-    [0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70],
-    [0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80],
-  ]
-  grind_4_sub_thresholds_futures = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-  ]
+  grind_4_stakes_futures = [0.20, 0.20, 0.20]
+  grind_4_sub_thresholds_futures = [-0.06, -0.07, -0.08]
 
-  grind_5_stop_grinds_spot = -0.16
+  grind_5_stop_grinds_spot = -0.20
   grind_5_profit_threshold_spot = 0.048
-  grind_5_stakes_spot = [
-    [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10],
-    [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-    [0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30],
-    [0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40],
-    [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50],
-    [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60],
-    [0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70],
-    [0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80],
-  ]
-  grind_5_sub_thresholds_spot = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-  ]
+  grind_5_stakes_spot = [0.20, 0.20, 0.20]
+  grind_5_sub_thresholds_spot = [-0.06, -0.07, -0.08]
 
-  grind_5_stop_grinds_futures = -0.48
+  grind_5_stop_grinds_futures = -0.20
   grind_5_profit_threshold_futures = 0.048
-  grind_5_stakes_futures = [
-    [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10],
-    [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-    [0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20],
-    [0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30],
-    [0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40, 0.40],
-    [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50],
-    [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60],
-    [0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70, 0.70],
-    [0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80],
-  ]
-  grind_5_sub_thresholds_futures = [
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-    [-0.10, -0.12, -0.14, -0.16, -0.18, -0.20, -0.22, -0.24, -0.26, -0.28],
-  ]
+  grind_5_stakes_futures = [0.20, 0.20, 0.20]
+  grind_5_sub_thresholds_futures = [-0.06, -0.07, -0.08]
 
   grind_1_derisk_1_stop_grinds_spot = -0.10
   grind_1_derisk_1_profit_threshold_spot = 0.018
@@ -437,15 +245,15 @@ class NostalgiaForInfinityX4(IStrategy):
   grind_1_derisk_1_stakes_futures = [0.50]
   grind_1_derisk_1_sub_thresholds_futures = [-0.10]
 
-  grind_2_derisk_1_stop_grinds_spot = -0.10
+  grind_2_derisk_1_stop_grinds_spot = -0.20
   grind_2_derisk_1_profit_threshold_spot = 0.018
-  grind_2_derisk_1_stakes_spot = [0.10, 0.15, 0.20, 0.25, 0.30]
-  grind_2_derisk_1_sub_thresholds_spot = [-0.05, -0.06, -0.07, -0.08, -0.09]
+  grind_2_derisk_1_stakes_spot = [0.15, 0.20, 0.25]
+  grind_2_derisk_1_sub_thresholds_spot = [-0.06, -0.07, -0.08]
 
-  grind_2_derisk_1_stop_grinds_futures = -0.10
+  grind_2_derisk_1_stop_grinds_futures = -0.20
   grind_2_derisk_1_profit_threshold_futures = 0.018
-  grind_2_derisk_1_stakes_futures = [0.10, 0.15, 0.20, 0.25, 0.30]
-  grind_2_derisk_1_sub_thresholds_futures = [-0.05, -0.06, -0.07, -0.08, -0.09]
+  grind_2_derisk_1_stakes_futures = [0.15, 0.20, 0.25]
+  grind_2_derisk_1_sub_thresholds_futures = [-0.06, -0.07, -0.08]
 
   # Non rebuy modes
   regular_mode_stake_multiplier_spot = [1.0]
@@ -16206,81 +16014,77 @@ class NostalgiaForInfinityX4(IStrategy):
         )
 
     grind_derisk = self.grind_derisk_futures if self.is_futures_mode else self.grind_derisk_spot
+
     grind_1_max_sub_grinds = 0
-    grind_1_stakes = []
-    grind_1_sub_thresholds = []
-    for i, item in enumerate(self.grind_1_stakes_futures if self.is_futures_mode else self.grind_1_stakes_spot):
-      if (slice_amount * item[0] / (trade.leverage if self.is_futures_mode else 1.0)) > min_stake:
-        grind_1_stakes = item
-        grind_1_sub_thresholds = (
-          self.grind_1_sub_thresholds_futures[i] if self.is_futures_mode else self.grind_1_sub_thresholds_spot[i]
-        )
-        grind_1_max_sub_grinds = len(grind_1_stakes)
-        break
+    grind_1_stakes = self.grind_1_stakes_futures.copy() if self.is_futures_mode else self.grind_1_stakes_spot.copy()
+    grind_1_sub_thresholds = (
+      self.grind_1_sub_thresholds_futures if self.is_futures_mode else self.grind_1_sub_thresholds_spot
+    )
+    if (slice_amount * grind_1_stakes[0] / (trade.leverage if self.is_futures_mode else 1.0)) < min_stake:
+      multi = slice_amount / min_stake
+      for i, _ in enumerate(grind_1_stakes):
+        grind_1_stakes[i] *= multi
+    grind_1_max_sub_grinds = len(grind_1_stakes)
     grind_1_stop_grinds = self.grind_1_stop_grinds_futures if self.is_futures_mode else self.grind_1_stop_grinds_spot
     grind_1_profit_threshold = (
       self.grind_1_profit_threshold_futures if self.is_futures_mode else self.grind_1_profit_threshold_spot
     )
 
     grind_2_max_sub_grinds = 0
-    grind_2_stakes = []
-    grind_2_sub_thresholds = []
-    for i, item in enumerate(self.grind_2_stakes_futures if self.is_futures_mode else self.grind_2_stakes_spot):
-      if (slice_amount * item[0] / (trade.leverage if self.is_futures_mode else 1.0)) > min_stake:
-        grind_2_stakes = item
-        grind_2_sub_thresholds = (
-          self.grind_2_sub_thresholds_futures[i] if self.is_futures_mode else self.grind_2_sub_thresholds_spot[i]
-        )
-        grind_2_max_sub_grinds = len(grind_2_stakes)
-        break
+    grind_2_stakes = self.grind_2_stakes_futures.copy() if self.is_futures_mode else self.grind_2_stakes_spot.copy()
+    grind_2_sub_thresholds = (
+      self.grind_2_sub_thresholds_futures if self.is_futures_mode else self.grind_2_sub_thresholds_spot
+    )
+    if (slice_amount * grind_2_stakes[0] / (trade.leverage if self.is_futures_mode else 1.0)) < min_stake:
+      multi = slice_amount / min_stake
+      for i, _ in enumerate(grind_2_stakes):
+        grind_2_stakes[i] *= multi
+    grind_2_max_sub_grinds = len(grind_2_stakes)
     grind_2_stop_grinds = self.grind_2_stop_grinds_futures if self.is_futures_mode else self.grind_2_stop_grinds_spot
     grind_2_profit_threshold = (
       self.grind_2_profit_threshold_futures if self.is_futures_mode else self.grind_2_profit_threshold_spot
     )
 
     grind_3_max_sub_grinds = 0
-    grind_3_stakes = []
-    grind_3_sub_thresholds = []
-    for i, item in enumerate(self.grind_3_stakes_futures if self.is_futures_mode else self.grind_3_stakes_spot):
-      if (slice_amount * item[0] / (trade.leverage if self.is_futures_mode else 1.0)) > min_stake:
-        grind_3_stakes = item
-        grind_3_sub_thresholds = (
-          self.grind_3_sub_thresholds_futures[i] if self.is_futures_mode else self.grind_3_sub_thresholds_spot[i]
-        )
-        grind_3_max_sub_grinds = len(grind_3_stakes)
-        break
+    grind_3_stakes = self.grind_3_stakes_futures.copy() if self.is_futures_mode else self.grind_3_stakes_spot.copy()
+    grind_3_sub_thresholds = (
+      self.grind_3_sub_thresholds_futures if self.is_futures_mode else self.grind_3_sub_thresholds_spot
+    )
+    if (slice_amount * grind_3_stakes[0] / (trade.leverage if self.is_futures_mode else 1.0)) < min_stake:
+      multi = slice_amount / min_stake
+      for i, _ in enumerate(grind_3_stakes):
+        grind_3_stakes[i] *= multi
+    grind_3_max_sub_grinds = len(grind_3_stakes)
     grind_3_stop_grinds = self.grind_3_stop_grinds_futures if self.is_futures_mode else self.grind_3_stop_grinds_spot
     grind_3_profit_threshold = (
       self.grind_3_profit_threshold_futures if self.is_futures_mode else self.grind_3_profit_threshold_spot
     )
 
     grind_4_max_sub_grinds = 0
-    grind_4_stakes = []
-    grind_4_sub_thresholds = []
-    for i, item in enumerate(self.grind_4_stakes_futures if self.is_futures_mode else self.grind_4_stakes_spot):
-      if (slice_amount * item[0] / (trade.leverage if self.is_futures_mode else 1.0)) > min_stake:
-        grind_4_stakes = item
-        grind_4_sub_thresholds = (
-          self.grind_4_sub_thresholds_futures[i] if self.is_futures_mode else self.grind_4_sub_thresholds_spot[i]
-        )
-        grind_4_max_sub_grinds = len(grind_4_stakes)
-        break
+    grind_4_stakes = self.grind_4_stakes_futures.copy() if self.is_futures_mode else self.grind_4_stakes_spot.copy()
+    grind_4_sub_thresholds = (
+      self.grind_4_sub_thresholds_futures if self.is_futures_mode else self.grind_4_sub_thresholds_spot
+    )
+    if (slice_amount * grind_4_stakes[0] / (trade.leverage if self.is_futures_mode else 1.0)) < min_stake:
+      multi = slice_amount / min_stake
+      for i, _ in enumerate(grind_4_stakes):
+        grind_4_stakes[i] *= multi
+    grind_4_max_sub_grinds = len(grind_4_stakes)
     grind_4_stop_grinds = self.grind_4_stop_grinds_futures if self.is_futures_mode else self.grind_4_stop_grinds_spot
     grind_4_profit_threshold = (
       self.grind_4_profit_threshold_futures if self.is_futures_mode else self.grind_4_profit_threshold_spot
     )
 
     grind_5_max_sub_grinds = 0
-    grind_5_stakes = []
-    grind_5_sub_thresholds = []
-    for i, item in enumerate(self.grind_5_stakes_futures if self.is_futures_mode else self.grind_5_stakes_spot):
-      if (slice_amount * item[0] / (trade.leverage if self.is_futures_mode else 1.0)) > min_stake:
-        grind_5_stakes = item
-        grind_5_sub_thresholds = (
-          self.grind_5_sub_thresholds_futures[i] if self.is_futures_mode else self.grind_5_sub_thresholds_spot[i]
-        )
-        grind_5_max_sub_grinds = len(grind_5_stakes)
-        break
+    grind_5_stakes = self.grind_5_stakes_futures.copy() if self.is_futures_mode else self.grind_5_stakes_spot.copy()
+    grind_5_sub_thresholds = (
+      self.grind_5_sub_thresholds_futures if self.is_futures_mode else self.grind_5_sub_thresholds_spot
+    )
+    if (slice_amount * grind_5_stakes[0] / (trade.leverage if self.is_futures_mode else 1.0)) < min_stake:
+      multi = slice_amount / min_stake
+      for i, _ in enumerate(grind_5_stakes):
+        grind_5_stakes[i] *= multi
+    grind_5_max_sub_grinds = len(grind_5_stakes)
     grind_5_stop_grinds = self.grind_5_stop_grinds_futures if self.is_futures_mode else self.grind_5_stop_grinds_spot
     grind_5_profit_threshold = (
       self.grind_5_profit_threshold_futures if self.is_futures_mode else self.grind_5_profit_threshold_spot
@@ -16613,9 +16417,9 @@ class NostalgiaForInfinityX4(IStrategy):
     if partial_sell:
       order = filled_exits[-1]
       sell_amount = order.safe_remaining * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         self.dp.send_msg(
           f"Exit (remaining) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {order.safe_remaining} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
@@ -16658,9 +16462,9 @@ class NostalgiaForInfinityX4(IStrategy):
           else self.grind_mode_first_entry_profit_threshold_spot
         ):
           sell_amount = first_entry.safe_filled * exit_rate / trade.leverage
-          if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+          if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
             sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-          ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+          ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
           if sell_amount > min_stake and ft_sell_amount > min_stake:
             grind_profit = (exit_rate - first_entry.safe_price) / first_entry.safe_price
             coin_amount = sell_amount / exit_rate
@@ -16684,9 +16488,9 @@ class NostalgiaForInfinityX4(IStrategy):
           else self.grind_mode_first_entry_stop_threshold_spot
         ):
           sell_amount = first_entry.safe_filled * exit_rate / trade.leverage
-          if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+          if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
             sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-          ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+          ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
           if sell_amount > min_stake and ft_sell_amount > min_stake:
             grind_profit = (exit_rate - first_entry.safe_price) / first_entry.safe_price
             coin_amount = sell_amount / exit_rate
@@ -16737,11 +16541,13 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.96))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.94))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.92))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.90))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.88))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
+          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.88))
+          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.86))
+          and (last_candle["close"] > (last_candle["high_max_6_1d"] * 0.84))
+          and (last_candle["close"] > (last_candle["high_max_12_1d"] * 0.82))
         )
         and (
           (last_candle["zlma_50_dec_15m"] == False)
@@ -16753,7 +16559,7 @@ class NostalgiaForInfinityX4(IStrategy):
         and (
           is_long_grind_buy
           or (
-            (last_candle["rsi_3"] > 10.0)
+            (last_candle["rsi_3"] > 16.0)
             and (last_candle["rsi_3_15m"] > 30.0)
             and (last_candle["rsi_3_1h"] > 30.0)
             and (last_candle["rsi_3_4h"] > 30.0)
@@ -16768,7 +16574,7 @@ class NostalgiaForInfinityX4(IStrategy):
           * grind_1_derisk_1_stakes[grind_1_derisk_1_sub_grind_count]
           / (trade.leverage if self.is_futures_mode else 1.0)
         )
-        if buy_amount < (min_stake * 1.7):
+        if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         if buy_amount > max_stake:
           return None
@@ -16794,9 +16600,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_1_derisk_1_current_open_rate) / grind_1_derisk_1_current_open_rate
       if grind_profit > grind_1_derisk_1_profit_threshold:
         sell_amount = grind_1_derisk_1_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (dl1) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_1_derisk_1_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -16815,9 +16621,9 @@ class NostalgiaForInfinityX4(IStrategy):
     # Grind stop
     if (grind_1_derisk_1_distance_ratio < grind_1_derisk_1_stop_grinds) and (is_derisk or is_derisk_calc):
       sell_amount = grind_1_derisk_1_total_amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         if grind_1_derisk_1_current_open_rate > 0.0:
@@ -16888,6 +16694,7 @@ class NostalgiaForInfinityX4(IStrategy):
                 and (last_candle["rsi_3_1h"] > 20.0)
                 and (last_candle["rsi_3_4h"] > 20.0)
                 and (last_candle["rsi_14"] < 42.0)
+                and (last_candle["zlma_50_dec_15m"] == False)
               )
             )
           )
@@ -16896,7 +16703,7 @@ class NostalgiaForInfinityX4(IStrategy):
             and (
               is_long_grind_buy
               or (
-                (last_candle["rsi_3"] > 10.0)
+                (last_candle["rsi_3"] > 12.0)
                 and (last_candle["rsi_3_15m"] > 16.0)
                 and (last_candle["rsi_3_1h"] > 16.0)
                 and (last_candle["rsi_3_4h"] > 16.0)
@@ -16911,7 +16718,7 @@ class NostalgiaForInfinityX4(IStrategy):
           * grind_2_derisk_1_stakes[grind_2_derisk_1_sub_grind_count]
           / (trade.leverage if self.is_futures_mode else 1.0)
         )
-        if buy_amount < (min_stake * 1.7):
+        if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         if buy_amount > max_stake:
           return None
@@ -16937,9 +16744,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_2_derisk_1_current_open_rate) / grind_2_derisk_1_current_open_rate
       if grind_profit > grind_2_derisk_1_profit_threshold:
         sell_amount = grind_2_derisk_1_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (dl2) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_2_derisk_1_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -16965,9 +16772,9 @@ class NostalgiaForInfinityX4(IStrategy):
       and (is_derisk or is_derisk_calc)
     ):
       sell_amount = grind_2_derisk_1_total_amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         if grind_2_derisk_1_current_open_rate > 0.0:
@@ -17013,32 +16820,46 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.86))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.84))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.82))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.80))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.78))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
+          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.88))
+          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.86))
         )
         and (
-          is_long_grind_buy
+          (
+            (grind_1_sub_grind_count == 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 16.0)
+                and (last_candle["rsi_3_1h"] > 30.0)
+                and (last_candle["rsi_3_4h"] > 30.0)
+                and (last_candle["rsi_14"] < 42.0)
+                and (last_candle["zlma_50_dec_15m"] == False)
+              )
+            )
+          )
           or (
-            (last_candle["rsi_3"] > 12.0)
-            and (last_candle["rsi_3_15m"] > 16.0)
-            and (last_candle["rsi_3_1h"] > 30.0)
-            and (last_candle["rsi_3_4h"] > 30.0)
-            and (last_candle["rsi_14"] < 46.0)
-            and (last_candle["zlma_50_dec_15m"] == False)
-            and (last_candle["zlma_50_dec_1h"] == False)
-            and (last_candle["zlma_50_dec_4h"] == False)
-            and (last_candle["close"] < last_candle["res_hlevel_4h"])
-            and (last_candle["close"] > last_candle["sup_level_4h"])
+            (grind_1_sub_grind_count > 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 12.0)
+                # and (last_candle["rsi_3_1h"] > 12.0)
+                # and (last_candle["rsi_3_4h"] > 12.0)
+                and (last_candle["rsi_14"] < 46.0)
+              )
+            )
           )
         )
       ):
         buy_amount = (
           slice_amount * grind_1_stakes[grind_1_sub_grind_count] / (trade.leverage if self.is_futures_mode else 1.0)
         )
-        if buy_amount < (min_stake * 1.7):
+        if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         if buy_amount > max_stake:
           return None
@@ -17064,9 +16885,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_1_current_open_rate) / grind_1_current_open_rate
       if grind_profit > grind_1_profit_threshold:
         sell_amount = grind_1_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (gd1) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_1_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -17085,22 +16906,21 @@ class NostalgiaForInfinityX4(IStrategy):
     # Grind stop
     if (
       (
-        (
-          grind_1_current_grind_stake_profit
-          < (slice_amount * grind_1_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
-        )
+        (grind_1_sub_grind_count > 0)
+        and (((exit_rate - grind_1_current_open_rate) / grind_1_current_open_rate) < grind_1_stop_grinds)
+        # (
+        #   grind_1_current_grind_stake_profit
+        #   < (slice_amount * grind_1_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
+        # )
         and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
-      and (
-        (trade.open_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-        or (filled_entries[-1].order_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-      )
+      and (trade.open_date_utc.replace(tzinfo=None) >= datetime(2024, 4, 14) or is_backtest)
     ):
       sell_amount = grind_1_total_amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         if grind_1_current_open_rate > 0.0:
@@ -17146,32 +16966,46 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.86))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.84))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.82))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.80))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.78))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
+          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.88))
+          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.86))
         )
         and (
-          is_long_grind_buy
+          (
+            (grind_2_sub_grind_count == 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 16.0)
+                and (last_candle["rsi_3_1h"] > 30.0)
+                and (last_candle["rsi_3_4h"] > 30.0)
+                and (last_candle["rsi_14"] < 42.0)
+                and (last_candle["zlma_50_dec_15m"] == False)
+              )
+            )
+          )
           or (
-            (last_candle["rsi_3"] > 12.0)
-            and (last_candle["rsi_3_15m"] > 16.0)
-            and (last_candle["rsi_3_1h"] > 30.0)
-            and (last_candle["rsi_3_4h"] > 30.0)
-            and (last_candle["rsi_14"] < 46.0)
-            and (last_candle["zlma_50_dec_15m"] == False)
-            and (last_candle["zlma_50_dec_1h"] == False)
-            and (last_candle["zlma_50_dec_4h"] == False)
-            and (last_candle["close"] < last_candle["res_hlevel_4h"])
-            and (last_candle["close"] > last_candle["sup_level_4h"])
+            (grind_2_sub_grind_count > 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 12.0)
+                # and (last_candle["rsi_3_1h"] > 12.0)
+                # and (last_candle["rsi_3_4h"] > 12.0)
+                and (last_candle["rsi_14"] < 46.0)
+              )
+            )
           )
         )
       ):
         buy_amount = (
           slice_amount * grind_2_stakes[grind_2_sub_grind_count] / (trade.leverage if self.is_futures_mode else 1.0)
         )
-        if buy_amount < (min_stake * 1.7):
+        if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         if buy_amount > max_stake:
           return None
@@ -17197,9 +17031,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_2_current_open_rate) / grind_2_current_open_rate
       if grind_profit > grind_2_profit_threshold:
         sell_amount = grind_2_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (gd2) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_2_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -17218,22 +17052,21 @@ class NostalgiaForInfinityX4(IStrategy):
     # Grind stop
     if (
       (
-        (
-          grind_2_current_grind_stake_profit
-          < (slice_amount * grind_2_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
-        )
+        (grind_2_sub_grind_count > 0)
+        and (((exit_rate - grind_2_current_open_rate) / grind_2_current_open_rate) < grind_2_stop_grinds)
+        # (
+        #   grind_2_current_grind_stake_profit
+        #   < (slice_amount * grind_2_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
+        # )
         and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
-      and (
-        (trade.open_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-        or (filled_entries[-1].order_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-      )
+      and (trade.open_date_utc.replace(tzinfo=None) >= datetime(2024, 4, 14) or is_backtest)
     ):
       sell_amount = grind_2_total_amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         if grind_2_current_open_rate > 0.0:
@@ -17279,32 +17112,46 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.86))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.84))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.82))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.80))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.78))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
+          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.88))
+          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.86))
         )
         and (
-          is_long_grind_buy
+          (
+            (grind_3_sub_grind_count == 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 16.0)
+                and (last_candle["rsi_3_1h"] > 30.0)
+                and (last_candle["rsi_3_4h"] > 30.0)
+                and (last_candle["rsi_14"] < 42.0)
+                and (last_candle["zlma_50_dec_15m"] == False)
+              )
+            )
+          )
           or (
-            (last_candle["rsi_3"] > 12.0)
-            and (last_candle["rsi_3_15m"] > 16.0)
-            and (last_candle["rsi_3_1h"] > 30.0)
-            and (last_candle["rsi_3_4h"] > 30.0)
-            and (last_candle["rsi_14"] < 46.0)
-            and (last_candle["zlma_50_dec_15m"] == False)
-            and (last_candle["zlma_50_dec_1h"] == False)
-            and (last_candle["zlma_50_dec_4h"] == False)
-            and (last_candle["close"] < last_candle["res_hlevel_4h"])
-            and (last_candle["close"] > last_candle["sup_level_4h"])
+            (grind_3_sub_grind_count > 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 12.0)
+                # and (last_candle["rsi_3_1h"] > 12.0)
+                # and (last_candle["rsi_3_4h"] > 12.0)
+                and (last_candle["rsi_14"] < 46.0)
+              )
+            )
           )
         )
       ):
         buy_amount = (
           slice_amount * grind_3_stakes[grind_3_sub_grind_count] / (trade.leverage if self.is_futures_mode else 1.0)
         )
-        if buy_amount < (min_stake * 1.7):
+        if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         if buy_amount > max_stake:
           return None
@@ -17330,9 +17177,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_3_current_open_rate) / grind_3_current_open_rate
       if grind_profit > grind_3_profit_threshold:
         sell_amount = grind_3_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (gd3) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_3_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -17351,22 +17198,21 @@ class NostalgiaForInfinityX4(IStrategy):
     # Grind stop
     if (
       (
-        (
-          grind_3_current_grind_stake_profit
-          < (slice_amount * grind_3_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
-        )
+        (grind_3_sub_grind_count > 0)
+        and (((exit_rate - grind_3_current_open_rate) / grind_3_current_open_rate) < grind_3_stop_grinds)
+        # (
+        #   grind_3_current_grind_stake_profit
+        #   < (slice_amount * grind_3_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
+        # )
         and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
-      and (
-        (trade.open_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-        or (filled_entries[-1].order_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-      )
+      and (trade.open_date_utc.replace(tzinfo=None) >= datetime(2024, 4, 14) or is_backtest)
     ):
       sell_amount = grind_3_total_amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         if grind_3_current_open_rate > 0.0:
@@ -17412,32 +17258,46 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.86))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.84))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.82))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.80))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.78))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
+          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.88))
+          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.86))
         )
         and (
-          is_long_grind_buy
+          (
+            (grind_4_sub_grind_count == 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 16.0)
+                and (last_candle["rsi_3_1h"] > 30.0)
+                and (last_candle["rsi_3_4h"] > 30.0)
+                and (last_candle["rsi_14"] < 42.0)
+                and (last_candle["zlma_50_dec_15m"] == False)
+              )
+            )
+          )
           or (
-            (last_candle["rsi_3"] > 12.0)
-            and (last_candle["rsi_3_15m"] > 16.0)
-            and (last_candle["rsi_3_1h"] > 30.0)
-            and (last_candle["rsi_3_4h"] > 30.0)
-            and (last_candle["rsi_14"] < 46.0)
-            and (last_candle["zlma_50_dec_15m"] == False)
-            and (last_candle["zlma_50_dec_1h"] == False)
-            and (last_candle["zlma_50_dec_4h"] == False)
-            and (last_candle["close"] < last_candle["res_hlevel_4h"])
-            and (last_candle["close"] > last_candle["sup_level_4h"])
+            (grind_4_sub_grind_count > 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 12.0)
+                # and (last_candle["rsi_3_1h"] > 12.0)
+                # and (last_candle["rsi_3_4h"] > 12.0)
+                and (last_candle["rsi_14"] < 46.0)
+              )
+            )
           )
         )
       ):
         buy_amount = (
           slice_amount * grind_4_stakes[grind_4_sub_grind_count] / (trade.leverage if self.is_futures_mode else 1.0)
         )
-        if buy_amount < (min_stake * 1.7):
+        if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         if buy_amount > max_stake:
           return None
@@ -17463,9 +17323,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_4_current_open_rate) / grind_4_current_open_rate
       if grind_profit > grind_4_profit_threshold:
         sell_amount = grind_4_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (gd4) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_4_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -17484,22 +17344,21 @@ class NostalgiaForInfinityX4(IStrategy):
     # Grind stop
     if (
       (
-        (
-          grind_4_current_grind_stake_profit
-          < (slice_amount * grind_4_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
-        )
+        (grind_4_sub_grind_count > 0)
+        and (((exit_rate - grind_4_current_open_rate) / grind_4_current_open_rate) < grind_4_stop_grinds)
+        # (
+        #   grind_4_current_grind_stake_profit
+        #   < (slice_amount * grind_4_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
+        # )
         and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
-      and (
-        (trade.open_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-        or (filled_entries[-1].order_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-      )
+      and (trade.open_date_utc.replace(tzinfo=None) >= datetime(2024, 4, 14) or is_backtest)
     ):
       sell_amount = grind_4_total_amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         if grind_4_current_open_rate > 0.0:
@@ -17545,32 +17404,44 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.86))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.84))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.82))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.80))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.78))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
         )
         and (
-          is_long_grind_buy
+          (
+            (grind_5_sub_grind_count == 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 16.0)
+                and (last_candle["rsi_3_1h"] > 30.0)
+                and (last_candle["rsi_3_4h"] > 30.0)
+                and (last_candle["rsi_14"] < 42.0)
+                and (last_candle["zlma_50_dec_15m"] == False)
+              )
+            )
+          )
           or (
-            (last_candle["rsi_3"] > 12.0)
-            and (last_candle["rsi_3_15m"] > 16.0)
-            and (last_candle["rsi_3_1h"] > 30.0)
-            and (last_candle["rsi_3_4h"] > 30.0)
-            and (last_candle["rsi_14"] < 46.0)
-            and (last_candle["zlma_50_dec_15m"] == False)
-            and (last_candle["zlma_50_dec_1h"] == False)
-            and (last_candle["zlma_50_dec_4h"] == False)
-            and (last_candle["close"] < last_candle["res_hlevel_4h"])
-            and (last_candle["close"] > last_candle["sup_level_4h"])
+            (grind_5_sub_grind_count > 0)
+            and (
+              is_long_grind_buy
+              or (
+                (last_candle["rsi_3"] > 12.0)
+                and (last_candle["rsi_3_15m"] > 12.0)
+                # and (last_candle["rsi_3_1h"] > 12.0)
+                # and (last_candle["rsi_3_4h"] > 12.0)
+                and (last_candle["rsi_14"] < 46.0)
+              )
+            )
           )
         )
       ):
         buy_amount = (
           slice_amount * grind_5_stakes[grind_5_sub_grind_count] / (trade.leverage if self.is_futures_mode else 1.0)
         )
-        if buy_amount < (min_stake * 1.7):
+        if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         if buy_amount > max_stake:
           return None
@@ -17596,9 +17467,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_5_current_open_rate) / grind_5_current_open_rate
       if grind_profit > grind_5_profit_threshold:
         sell_amount = grind_5_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (gd5) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_5_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -17617,22 +17488,21 @@ class NostalgiaForInfinityX4(IStrategy):
     # Grind stop
     if (
       (
-        (
-          grind_5_current_grind_stake_profit
-          < (slice_amount * grind_5_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
-        )
+        (grind_5_sub_grind_count > 0)
+        and (((exit_rate - grind_5_current_open_rate) / grind_5_current_open_rate) < grind_5_stop_grinds)
+        # (
+        #   grind_5_current_grind_stake_profit
+        #   < (slice_amount * grind_5_stop_grinds / (trade.leverage if self.is_futures_mode else 1.0))
+        # )
         and (is_derisk or is_derisk_calc or is_grind_mode)
       )
       # temporary
-      and (
-        (trade.open_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-        or (filled_entries[-1].order_date_utc.replace(tzinfo=None) >= datetime(2023, 8, 28) or is_backtest)
-      )
+      and (trade.open_date_utc.replace(tzinfo=None) >= datetime(2024, 4, 14) or is_backtest)
     ):
       sell_amount = grind_5_total_amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         if grind_5_current_open_rate > 0.0:
@@ -17684,18 +17554,20 @@ class NostalgiaForInfinityX4(IStrategy):
           and (last_candle["global_protections_long_dump"] == True)
         )
         and (
-          (last_candle["close"] > (last_candle["close_max_12"] * 0.92))
-          and (last_candle["close"] > (last_candle["close_max_24"] * 0.90))
-          and (last_candle["close"] > (last_candle["close_max_48"] * 0.88))
-          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.86))
-          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.84))
-          and (last_candle["close"] > (last_candle["high_max_6_1d"] * 0.76))
-          and (last_candle["close"] > (last_candle["high_max_12_1d"] * 0.70))
+          (last_candle["close"] > (last_candle["close_max_12"] * 0.94))
+          and (last_candle["close"] > (last_candle["close_max_24"] * 0.92))
+          and (last_candle["close"] > (last_candle["close_max_48"] * 0.90))
+          and (last_candle["close"] > (last_candle["high_max_24_1h"] * 0.88))
+          and (last_candle["close"] > (last_candle["high_max_48_1h"] * 0.86))
+          and (last_candle["close"] > (last_candle["high_max_6_1d"] * 0.84))
+          and (last_candle["close"] > (last_candle["high_max_12_1d"] * 0.82))
         )
         and (
           (last_candle["zlma_50_dec_15m"] == False)
           and (last_candle["zlma_50_dec_1h"] == False)
           and (last_candle["zlma_50_dec_4h"] == False)
+          and (last_candle["ema_200_dec_48_1h"] == False)
+          and (last_candle["ema_200_dec_24_4h"] == False)
           and (last_candle["close"] < last_candle["res_hlevel_4h"])
           and (last_candle["close"] > last_candle["sup_level_4h"])
         )
@@ -17706,7 +17578,7 @@ class NostalgiaForInfinityX4(IStrategy):
             and (last_candle["rsi_3_15m"] > 30.0)
             and (last_candle["rsi_3_1h"] > 30.0)
             and (last_candle["rsi_3_4h"] > 30.0)
-            and (last_candle["rsi_14"] < 46.0)
+            and (last_candle["rsi_14"] < 42.0)
           )
         )
       ):
@@ -17746,9 +17618,9 @@ class NostalgiaForInfinityX4(IStrategy):
       )
     ):
       sell_amount = derisk_1_reentry_order.safe_filled * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         self.dp.send_msg(
@@ -17775,9 +17647,9 @@ class NostalgiaForInfinityX4(IStrategy):
       )
     ):
       sell_amount = trade.amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         self.dp.send_msg(
@@ -17822,9 +17694,9 @@ class NostalgiaForInfinityX4(IStrategy):
       )
     ):
       sell_amount = trade.amount * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         self.dp.send_msg(
           f"De-risk (dd0) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_1_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
@@ -18428,9 +18300,9 @@ class NostalgiaForInfinityX4(IStrategy):
     if partial_sell:
       order = filled_exits[-1]
       sell_amount = order.safe_remaining * exit_rate / trade.leverage
-      if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+      if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
         sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         self.dp.send_msg(
           f"Exit (remaining) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {order.safe_remaining} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
@@ -18575,9 +18447,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_1_current_open_rate) / grind_1_current_open_rate
       if grind_profit > regular_mode_grind_1_profit_threshold:
         sell_amount = grind_1_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (g1) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_1_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -18661,9 +18533,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_2_current_open_rate) / grind_2_current_open_rate
       if grind_profit > regular_mode_grind_2_profit_threshold:
         sell_amount = grind_2_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (g2) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_2_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -18747,9 +18619,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_3_current_open_rate) / grind_3_current_open_rate
       if grind_profit > regular_mode_grind_3_profit_threshold:
         sell_amount = grind_3_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (g3) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_3_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -18833,9 +18705,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_4_current_open_rate) / grind_4_current_open_rate
       if grind_profit > regular_mode_grind_4_profit_threshold:
         sell_amount = grind_4_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (g4) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_4_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -18919,9 +18791,9 @@ class NostalgiaForInfinityX4(IStrategy):
       grind_profit = (exit_rate - grind_5_current_open_rate) / grind_5_current_open_rate
       if grind_profit > regular_mode_grind_5_profit_threshold:
         sell_amount = grind_5_total_amount * exit_rate / trade.leverage
-        if (current_stake_amount - sell_amount) < (min_stake * 1.55):
+        if ((current_stake_amount / trade.leverage) - sell_amount) < (min_stake * 1.55):
           sell_amount = (trade.amount * exit_rate / trade.leverage) - (min_stake * 1.55)
-        ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
         if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
             f"Grinding exit (g5) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Coin amount: {grind_5_total_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}% | Grind profit: {(grind_profit * 100.0):.2f}% ({grind_profit * sell_amount * trade.leverage} {self.config['stake_currency']})"
@@ -18945,7 +18817,7 @@ class NostalgiaForInfinityX4(IStrategy):
       / (trade.leverage if self.is_futures_mode else 1.0)
     ):
       sell_amount = trade.amount * exit_rate / trade.leverage - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         self.dp.send_msg(
@@ -18969,7 +18841,7 @@ class NostalgiaForInfinityX4(IStrategy):
       )
     ):
       sell_amount = trade.amount * exit_rate / trade.leverage - (min_stake * 1.55)
-      ft_sell_amount = sell_amount * (trade.stake_amount / trade.amount) / exit_rate
+      ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
       if sell_amount > min_stake and ft_sell_amount > min_stake:
         grind_profit = 0.0
         self.dp.send_msg(
@@ -20009,8 +19881,8 @@ class NostalgiaForInfinityX4(IStrategy):
         """
     df = self.base_tf_5m_indicators(metadata, df)
 
-    df.fillna({"zlma_50_1h": 0.0}, inplace=True)
-    df.fillna({"cti_20_1d": 0.0}, inplace=True)
+    df["zlma_50_1h"] = df["zlma_50_1h"].astype(np.float64).replace(to_replace=[np.nan, None], value=(0.0))
+    df["cti_20_1d"] = df["cti_20_1d"].astype(np.float64).replace(to_replace=[np.nan, None], value=(0.0))
     df["r_480_4h"] = df["r_480_4h"].astype(np.float64).replace(to_replace=[np.nan, None], value=(-50.0))
     df["rsi_14_1d"] = df["rsi_14_1d"].astype(np.float64).replace(to_replace=[np.nan, None], value=(50.0))
 
