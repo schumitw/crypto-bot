@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.622"
+    return "v14.1.623"
 
   stoploss = -0.99
 
@@ -13285,6 +13285,19 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["r_480_1h"] < -40.0)
         | (df["close"] > df["sup_level_1h"])
         | (df["close"] > df["sup_level_4h"])
+      )
+      & (
+        (df["change_pct_4h"] > -0.08)
+        | (df["not_downtrend_4h"])
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3_15m"] > 20.0)
+        | (df["rsi_14_1h"] > 30.0)
+        | (df["rsi_3_4h"] > 16.0)
+        | (df["rsi_14_4h"] > 30.0)
+        | (df["r_480_1h"] > -70.0)
+        | (df["close"] > df["sup_level_4h"])
+        | (df["ema_200_dec_48_1h"] == False)
       )
     )
 
@@ -32475,7 +32488,7 @@ class NostalgiaForInfinityX4(IStrategy):
       and profit_stake
       < -(filled_entries[0].cost * self.stop_threshold / (trade.leverage if self.is_futures_mode else 1.0))
       # temporary
-      and (trade.open_date_utc.replace(tzinfo=None) >= datetime(2023, 6, 13) or is_backtest)
+      and (trade.open_date_utc.replace(tzinfo=None) >= datetime(2024, 4, 1) or is_backtest)
     ):
       return True, f"exit_{mode_name}_stoploss"
 
