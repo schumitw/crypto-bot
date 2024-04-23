@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.623"
+    return "v14.1.624"
 
   stoploss = -0.99
 
@@ -13299,6 +13299,17 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["close"] > df["sup_level_4h"])
         | (df["ema_200_dec_48_1h"] == False)
       )
+      & (
+        (df["change_pct_4h"] > -0.01)
+        | (df["change_pct_4h"].shift(48) < 0.01)
+        | (df["not_downtrend_1h"])
+        | (df["rsi_3_1h"] > 12.0)
+        | (df["rsi_14_1h"] < 36.0)
+        | (df["rsi_14_4h"] < 50.0)
+        | (df["r_480_1h"] > -65.0)
+        | (df["close"] > df["sup_level_1h"])
+        | (df["ema_200_dec_24_4h"] == False)
+      )
     )
 
     # Global protections
@@ -17535,7 +17546,7 @@ class NostalgiaForInfinityX4(IStrategy):
           if self.entry_10_ema_200_not_dec_1h_enabled.value:
             long_entry_logic.append(df["ema_200_dec_48_1h"] == False)
           if self.entry_10_ema_200_not_dec_4h_enabled.value:
-            long_entry_logic.append(df["ema_200_dec_10_4h"] == False)
+            long_entry_logic.append(df["ema_200_dec_24_4h"] == False)
           if self.entry_10_ema_200_not_dec_1d_enabled.value:
             long_entry_logic.append(df["ema_200_dec_4_1d"] == False)
           if self.entry_10_not_downtrend_15m_enabled.value:
