@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.626"
+    return "v14.1.627"
 
   stoploss = -0.99
 
@@ -169,8 +169,8 @@ class NostalgiaForInfinityX4(IStrategy):
   stop_threshold_futures = 12.0
   stop_threshold_futures_rapid = 12.0
   stop_threshold_spot_rapid = 4.0
-  stop_threshold_spot_rebuy = 0.9
-  stop_threshold_futures_rebuy = 3.9
+  stop_threshold_spot_rebuy = 2.0
+  stop_threshold_futures_rebuy = 4.0
 
   # Rebuy mode minimum number of free slots
   rebuy_mode_min_free_slots = 2
@@ -416,7 +416,7 @@ class NostalgiaForInfinityX4(IStrategy):
     "long_entry_condition_50_enable": True,
     "long_entry_condition_61_enable": True,
     "long_entry_condition_81_enable": False,
-    # "long_entry_condition_82_enable": True,
+    "long_entry_condition_82_enable": False,
     "long_entry_condition_101_enable": True,
     "long_entry_condition_102_enable": True,
     "long_entry_condition_103_enable": True,
@@ -24581,153 +24581,45 @@ class NostalgiaForInfinityX4(IStrategy):
           long_entry_logic.append(df["close"].lt(df["bb40_2_low"].shift()))
           long_entry_logic.append(df["close"].le(df["close"].shift()))
 
-        # Condition #82 - Long mode bull.
+        # Condition #82 - High profit mode (Long).
         if index == 82:
           # Protections
           long_entry_logic.append(df["protections_long_global"] == True)
           long_entry_logic.append(df["global_protections_long_pump"] == True)
           long_entry_logic.append(df["global_protections_long_dump"] == True)
-          long_entry_logic.append(df["btc_pct_close_max_24_5m"] < 0.03)
-          long_entry_logic.append(df["btc_pct_close_max_72_5m"] < 0.03)
-          long_entry_logic.append(df["close_max_48"] < (df["close"] * 1.2))
-          long_entry_logic.append(df["high_max_12_1h"] < (df["close"] * 1.3))
+          long_entry_logic.append(df["btc_pct_close_max_24_5m"] < 0.06)
+          long_entry_logic.append(df["btc_pct_close_max_72_5m"] < 0.06)
+          long_entry_logic.append(df["close"] > (df["close_max_12"] * 0.80))
+          long_entry_logic.append(df["close"] > (df["close_max_24"] * 0.78))
+          long_entry_logic.append(df["close"] > (df["close_max_48"] * 0.76))
+          long_entry_logic.append(df["close"] > (df["high_max_12_1h"] * 0.74))
+          long_entry_logic.append(df["close"] > (df["high_max_24_1h"] * 0.72))
+          long_entry_logic.append(df["hl_pct_change_6_1h"] < 0.60)
+          long_entry_logic.append(df["hl_pct_change_12_1h"] < 0.70)
+          long_entry_logic.append(df["hl_pct_change_24_1h"] < 0.80)
+          long_entry_logic.append(df["hl_pct_change_48_1h"] < 0.90)
+          long_entry_logic.append(df["num_empty_288"] < allowed_empty_candles)
 
+          long_entry_logic.append(df["rsi_3"] >= 4.0)
+          long_entry_logic.append(df["rsi_3"] <= 50.0)
+          long_entry_logic.append(df["rsi_3_15m"] >= 4.0)
+          long_entry_logic.append(df["rsi_3_1h"] >= 10.0)
+          long_entry_logic.append(df["rsi_3_4h"] >= 10.0)
+          long_entry_logic.append(df["cti_20_1h"] <= 0.90)
+          long_entry_logic.append(df["rsi_14_1h"] <= 80.0)
+          long_entry_logic.append(df["cti_20_4h"] <= 0.90)
+          long_entry_logic.append(df["rsi_14_4h"] <= 80.0)
+          long_entry_logic.append(df["cti_20_1d"] <= 0.90)
+          long_entry_logic.append(df["rsi_14_1d"] <= 80.0)
+
+          long_entry_logic.append(df["ema_200_dec_48_1h"] == False)
+          long_entry_logic.append(df["ema_26_1h"] > df["ema_200_1h"])
           long_entry_logic.append(df["ema_50_1h"] > df["ema_200_1h"])
-          long_entry_logic.append(df["sma_50_1h"] > df["sma_200_1h"])
-
-          long_entry_logic.append(df["ema_50_4h"] > df["ema_200_4h"])
-          long_entry_logic.append(df["sma_50_4h"] > df["sma_200_4h"])
-
-          long_entry_logic.append(df["rsi_14_4h"] < 85.0)
-          long_entry_logic.append(df["rsi_14_1d"] < 85.0)
-          long_entry_logic.append(df["r_480_4h"] < -10.0)
-
-          # current 1d long green with long top wick
-          long_entry_logic.append((df["change_pct_1d"] < 0.12) | (df["top_wick_pct_1d"] < 0.12))
-          # overbought 1d, overbought 4h, downtrend 1h, drop in last 2h
-          long_entry_logic.append(
-            (df["rsi_14_1d"] < 70.0)
-            | (df["rsi_14_4h"] < 70.0)
-            | (df["not_downtrend_1h"])
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 4h red, downtrend 1h, overbought 4h, drop in last 2h
-          long_entry_logic.append(
-            (df["change_pct_4h"] > -0.06)
-            | (df["not_downtrend_1h"])
-            | (df["cti_20_4h"] < 0.5)
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 4h long red, downtrend 1h, overbought 1d, drop in last 2h
-          long_entry_logic.append(
-            (df["change_pct_4h"] > -0.12)
-            | (df["not_downtrend_1h"])
-            | (df["cti_20_1d"] < 0.8)
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 1d red, overbought 1d, downtrend 1h, downtrend 4h, drop in last 2h
-          long_entry_logic.append(
-            (df["change_pct_1d"] > -0.12)
-            | (df["cti_20_1d"] < 0.85)
-            | (df["not_downtrend_1h"])
-            | (df["is_downtrend_3_4h"] == False)
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 1d red, overbought 1d, downtrend 1h, current 4h red, previous 4h green with top wick
-          long_entry_logic.append(
-            (df["change_pct_1d"] > -0.08)
-            | (df["cti_20_1d"] < 0.85)
-            | (df["not_downtrend_1h"])
-            | (df["change_pct_4h"] > -0.0)
-            | (df["change_pct_4h"].shift(48) < 0.04)
-            | (df["top_wick_pct_4h"].shift(48) < 0.04)
-          )
-          # current 1d long red with long top wick, overbought 1d, drop in last 2h
-          long_entry_logic.append(
-            (df["change_pct_1d"] > -0.12)
-            | (df["top_wick_pct_1d"] < 0.12)
-            | (df["cti_20_1d"] < 0.5)
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 1d long red, overbought 1d, drop in last 2h
-          long_entry_logic.append(
-            (df["change_pct_1d"] > -0.16) | (df["cti_20_1d"] < 0.5) | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 4h red with top wick, overbought 1d
-          long_entry_logic.append(
-            (df["change_pct_4h"] > -0.04) | (df["top_wick_pct_4h"] < 0.04) | (df["cti_20_1d"] < 0.85)
-          )
-          # current 4h green with top wick, overbought 4h
-          long_entry_logic.append(
-            (df["change_pct_4h"] < 0.04) | (df["top_wick_pct_4h"] < 0.04) | (df["rsi_14_4h"] < 70.0)
-          )
-          # current 4h red, downtrend 1h, overbought 1d
-          long_entry_logic.append((df["change_pct_4h"] > -0.04) | (df["not_downtrend_1h"]) | (df["cti_20_1d"] < 0.5))
-          # current 1d long relative top wick, overbought 1d, drop in last 2h
-          long_entry_logic.append(
-            (df["top_wick_pct_1d"] < (abs(df["change_pct_1d"]) * 4.0))
-            | (df["cti_20_1d"] < 0.5)
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 4h relative long top wick, overbought 1d, drop in last 2h
-          long_entry_logic.append(
-            (df["top_wick_pct_4h"] < (abs(df["change_pct_4h"]) * 4.0))
-            | (df["cti_20_1d"] < 0.85)
-            | (df["rsi_14_1d"] < 50.0)
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current and previous 1d red, overbought 1d, drop in last 2h
-          long_entry_logic.append(
-            (df["change_pct_1d"] > -0.04)
-            | (df["change_pct_1d"].shift(288) > -0.04)
-            | (df["cti_20_1d"] < 0.5)
-            | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          # current 4h long green, overbought 4h, drop in last 2h
-          long_entry_logic.append(
-            (df["change_pct_1d"] < 0.08) | (df["rsi_14_4h"] < 70.0) | (df["close_max_24"] < (df["close"] * 1.1))
-          )
-          long_entry_logic.append(
-            (df["not_downtrend_15m"])
-            | (df["not_downtrend_1h"])
-            | (df["cti_20_1h"] < -0.5)
-            | (df["cti_20_4h"] < 0.75)
-            | (df["cti_20_1d"] < -0.0)
-            | (df["ema_200_dec_24_4h"] == False)
-            | (df["ema_200_dec_4_1d"] == False)
-          )
-          long_entry_logic.append(
-            (df["not_downtrend_1h"])
-            | (df["cti_20_15m"] < -0.8)
-            | (df["rsi_3_15m"] > 10.0)
-            | (df["cti_20_1h"] < -0.8)
-            | (df["rsi_3_1h"] > 10.0)
-            | (df["cti_20_4h"] < -0.0)
-            | ((df["ema_26"] - df["ema_12"]) > (df["open"] * 0.04))
-          )
-          long_entry_logic.append(
-            (df["not_downtrend_1h"])
-            | (df["cti_20_15m"] < -0.9)
-            | (df["rsi_3_15m"] > 30.0)
-            | (df["cti_20_1h"] < -0.8)
-            | (df["rsi_3_1h"] > 10.0)
-            | (df["cti_20_4h"] < -0.0)
-            | ((df["ema_26"] - df["ema_12"]) > (df["open"] * 0.04))
-          )
-          long_entry_logic.append(
-            (df["cti_20_15m"] < -0.9)
-            | (df["cti_20_1h"] < -0.8)
-            | (df["cti_20_4h"] < 0.75)
-            | (df["r_14_4h"] < -25.0)
-            | (df["cti_20_1d"] < 0.5)
-            | ((df["ema_26"] - df["ema_12"]) > (df["open"] * 0.04))
-          )
 
           # Logic
           long_entry_logic.append(df["ema_26"] > df["ema_12"])
-          long_entry_logic.append((df["ema_26"] - df["ema_12"]) > (df["open"] * 0.03))
+          long_entry_logic.append((df["ema_26"] - df["ema_12"]) > (df["open"] * 0.024))
           long_entry_logic.append((df["ema_26"].shift() - df["ema_12"].shift()) > (df["open"] / 100))
-          long_entry_logic.append(df["cti_20"] < -0.8)
 
         # Condition #101 - Long mode rapid
         if index == 101:
@@ -35905,6 +35797,10 @@ class NostalgiaForInfinityX4(IStrategy):
     if count_of_entries == 0:
       return None
 
+    has_order_tags = False
+    if hasattr(filled_orders[0], "ft_order_tag"):
+      has_order_tags = True
+
     # The first exit is de-risk (providing the trade is still open)
     if count_of_exits > 0:
       return self.long_grind_adjust_trade_position(
@@ -36003,28 +35899,35 @@ class NostalgiaForInfinityX4(IStrategy):
         if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         self.dp.send_msg(
-          f"Rebuy [{trade.pair}] | Rate: {current_rate} | Stake amount: {buy_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+          f"Rebuy (r) [{trade.pair}] | Rate: {current_rate} | Stake amount: {buy_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
         )
-        return buy_amount
+        log.info(
+          f"Rebuy (r) [{current_time}] [{trade.pair}] | Rate: {current_rate} | Stake amount: {buy_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+        )
+        if has_order_tags:
+          return buy_amount, "r"
+        else:
+          return buy_amount
 
       if profit_stake < (
         slice_amount
         * (self.rebuy_mode_derisk_futures if self.is_futures_mode else self.rebuy_mode_derisk_spot)
         / (trade.leverage if self.is_futures_mode else 1.0)
       ):
-        sell_amount = trade.amount * exit_rate / (trade.leverage if self.is_futures_mode else 1.0) * 0.999
-        if (current_stake_amount / (trade.leverage if self.is_futures_mode else 1.0) - sell_amount) < (
-          min_stake * 1.5
-        ):
-          sell_amount = (trade.amount * exit_rate / (trade.leverage if self.is_futures_mode else 1.0)) - (
-            min_stake * 1.5
-          )
-        if sell_amount > min_stake:
+        sell_amount = trade.amount * exit_rate / trade.leverage - (min_stake * 1.55)
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
+        if sell_amount > min_stake and ft_sell_amount > min_stake:
           grind_profit = 0.0
           self.dp.send_msg(
-            f"Rebuy de-risk [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+            f"Rebuy de-risk (d1) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
           )
-          return -sell_amount
+          log.info(
+            f"Rebuy de-risk (d1) [{current_time}] [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+          )
+          if has_order_tags:
+            return -ft_sell_amount, "d1"
+          else:
+            return -ft_sell_amount
 
     return None
 
@@ -46233,6 +46136,10 @@ class NostalgiaForInfinityX4(IStrategy):
     if count_of_entries == 0:
       return None
 
+    has_order_tags = False
+    if hasattr(filled_orders[0], "ft_order_tag"):
+      has_order_tags = True
+
     # The first exit is de-risk (providing the trade is still open)
     if count_of_exits > 0:
       return self.short_grind_adjust_trade_position(
@@ -46331,28 +46238,34 @@ class NostalgiaForInfinityX4(IStrategy):
         if buy_amount < (min_stake * 1.5):
           buy_amount = min_stake * 1.5
         self.dp.send_msg(
-          f"Rebuy [{trade.pair}] | Rate: {current_rate} | Stake amount: {buy_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+          f"Rebuy (r) [{trade.pair}] | Rate: {current_rate} | Stake amount: {buy_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
         )
-        return buy_amount
+        log.info(
+          f"Rebuy (r) [{current_time}] [{trade.pair}] | Rate: {current_rate} | Stake amount: {buy_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+        )
+        if has_order_tags:
+          return buy_amount, "r"
+        else:
+          return buy_amount
 
       if profit_stake < (
         slice_amount
         * (self.rebuy_mode_derisk_futures if self.is_futures_mode else self.rebuy_mode_derisk_spot)
         / (trade.leverage if self.is_futures_mode else 1.0)
       ):
-        sell_amount = trade.amount * exit_rate / (trade.leverage if self.is_futures_mode else 1.0) * 0.999
-        if (current_stake_amount / (trade.leverage if self.is_futures_mode else 1.0) - sell_amount) < (
-          min_stake * 1.5
-        ):
-          sell_amount = (trade.amount * exit_rate / (trade.leverage if self.is_futures_mode else 1.0)) - (
-            min_stake * 1.5
-          )
-        if sell_amount > min_stake:
-          grind_profit = 0.0
+        sell_amount = trade.amount * exit_rate / trade.leverage - (min_stake * 1.55)
+        ft_sell_amount = sell_amount * trade.leverage * (trade.stake_amount / trade.amount) / exit_rate
+        if sell_amount > min_stake and ft_sell_amount > min_stake:
           self.dp.send_msg(
-            f"Rebuy de-risk [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+            f"Rebuy de-risk (d1) [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
           )
-          return -sell_amount
+          log.info(
+            f"Rebuy de-risk (d1) [{current_time}] [{trade.pair}] | Rate: {exit_rate} | Stake amount: {sell_amount} | Profit (stake): {profit_stake} | Profit: {(profit_ratio * 100.0):.2f}%"
+          )
+          if has_order_tags:
+            return -ft_sell_amount, "d1"
+          else:
+            return -ft_sell_amount
 
     return None
 
