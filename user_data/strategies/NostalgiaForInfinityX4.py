@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.666"
+    return "v14.1.667"
 
   stoploss = -0.99
 
@@ -13687,6 +13687,20 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["ema_200_dec_24_4h"] == False)
         | (df["ema_200_dec_4_1d"] == False)
       )
+      & (
+        (df["not_downtrend_15m"])
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3"] > 20.0)
+        | (df["rsi_3_15m"] > 16.0)
+        | (df["rsi_14_1h"] < 46.0)
+        | (df["rsi_14_4h"] < 46.0)
+        | (df["r_480_4h"] > -70.0)
+        | (df["close"] > df["sup_level_1h"])
+        | (df["close"] > df["sup_level_4h"])
+        | (df["ema_200_dec_24_4h"] == False)
+        | (df["ema_200_dec_4_1d"] == False)
+      )
     )
 
     # Global protections
@@ -24921,7 +24935,7 @@ class NostalgiaForInfinityX4(IStrategy):
 
           # Logic
           long_entry_logic.append(df["rsi_14"] < 32.0)
-          long_entry_logic.append(df["close"] < (df["ema_26"] * 0.970))
+          long_entry_logic.append(df["close"] < (df["ema_26"] * 0.972))
 
         # Condition #61 - Rebuy mode (Long).
         if index == 61:
