@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.701"
+    return "v14.1.702"
 
   stoploss = -0.99
 
@@ -113,7 +113,7 @@ class NostalgiaForInfinityX4(IStrategy):
   # Long Pump mode tags
   long_pump_mode_tags = ["21", "22", "23", "24", "25", "26"]
   # Long Quick mode tags
-  long_quick_mode_tags = ["41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51"]
+  long_quick_mode_tags = ["41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52"]
   # Long rebuy mode tags
   long_rebuy_mode_tags = ["61", "62"]
   # Long high profit mode tags
@@ -425,6 +425,7 @@ class NostalgiaForInfinityX4(IStrategy):
     "long_entry_condition_49_enable": True,
     "long_entry_condition_50_enable": True,
     "long_entry_condition_51_enable": True,
+    "long_entry_condition_52_enable": True,
     "long_entry_condition_61_enable": True,
     "long_entry_condition_62_enable": True,
     "long_entry_condition_81_enable": True,
@@ -438,7 +439,7 @@ class NostalgiaForInfinityX4(IStrategy):
     "long_entry_condition_107_enable": True,
     "long_entry_condition_108_enable": True,
     "long_entry_condition_109_enable": True,
-    "long_entry_condition_110_enable": False,
+    "long_entry_condition_110_enable": True,
     "long_entry_condition_120_enable": True,
   }
 
@@ -25205,6 +25206,28 @@ class NostalgiaForInfinityX4(IStrategy):
           long_entry_logic.append(df["rsi_14"] < 32.0)
           long_entry_logic.append(df["close"] < (df["ema_26"] * 0.972))
 
+        # Condition #52 - Quick mode (Long).
+        if index == 52:
+          # Protections
+          long_entry_logic.append(df["hl_pct_change_6_1h"] < 0.60)
+          long_entry_logic.append(df["hl_pct_change_12_1h"] < 0.70)
+          long_entry_logic.append(df["hl_pct_change_24_1h"] < 0.80)
+          long_entry_logic.append(df["hl_pct_change_48_1h"] < 0.90)
+          long_entry_logic.append(df["num_empty_288"] < allowed_empty_candles)
+
+          long_entry_logic.append(df["rsi_3_15m"] >= 4.0)
+          long_entry_logic.append(df["rsi_3_1h"] >= 4.0)
+          long_entry_logic.append(df["rsi_14_1h"] <= 70.0)
+          long_entry_logic.append(df["rsi_14_4h"] <= 70.0)
+          long_entry_logic.append(df["rsi_14_1d"] <= 75.0)
+
+          # Logic
+          long_entry_logic.append(df["rsi_14"] < 36.0)
+          long_entry_logic.append(df["close"] < (df["bb20_2_low"] * 0.988))
+          long_entry_logic.append(df["ema_26"] > df["ema_12"])
+          long_entry_logic.append((df["ema_26"] - df["ema_12"]) > (df["open"] * 0.028))
+          long_entry_logic.append((df["ema_26"].shift() - df["ema_12"].shift()) > (df["open"] / 100.0))
+
         # Condition #61 - Rebuy mode (Long).
         if index == 61:
           # Protections
@@ -25947,11 +25970,15 @@ class NostalgiaForInfinityX4(IStrategy):
           long_entry_logic.append(df["rsi_3"] > 2.0)
           long_entry_logic.append(df["rsi_3"] < 60.0)
           long_entry_logic.append(df["rsi_3_15m"] > 8.0)
+          long_entry_logic.append(df["rsi_3_1h"] > 12.0)
+          long_entry_logic.append(df["rsi_3_4h"] > 12.0)
+          long_entry_logic.append(df["rsi_3_1d"] > 12.0)
 
           # Logic
           long_entry_logic.append(df["rsi_14"] < 36.0)
-          long_entry_logic.append(df["ewo_50_200"] < -4.0)
-          long_entry_logic.append(df["close"] < (df["ema_20"] * 0.968))
+          long_entry_logic.append(df["cti_20"] < -0.75)
+          long_entry_logic.append(df["ewo_50_200"] < -6.0)
+          long_entry_logic.append(df["close"] < (df["ema_20"] * 0.988))
 
         # Condition #120 - Grind mode (Long).
         if index == 120:
