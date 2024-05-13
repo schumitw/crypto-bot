@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.705"
+    return "v14.1.707"
 
   stoploss = -0.99
 
@@ -344,7 +344,7 @@ class NostalgiaForInfinityX4(IStrategy):
   grind_mode_first_entry_profit_threshold_futures = 0.018
   grind_mode_first_entry_stop_threshold_spot = -0.20
   grind_mode_first_entry_stop_threshold_futures = -0.20
-  grind_mode_max_slots = 2
+  grind_mode_max_slots = 1
   grind_mode_coins = [
     "MATIC",
     "ADA",
@@ -13988,6 +13988,19 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["close"] > df["sup_level_4h"])
         | (df["close"] > df["sup_level_1d"])
         | (df["ema_200_dec_24_4h"] == False)
+      )
+      & (
+        (df["not_downtrend_1h"])
+        | (df["not_downtrend_4h"])
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3"] > 26.0)
+        | (df["rsi_3_15m"] > 30.0)
+        | (df["rsi_3_1h"] > 30.0)
+        | (df["rsi_3_4h"] > 30.0)
+        | (df["r_480_4h"] < -30.0)
+        | (df["close"] > df["sup_level_1h"])
+        | (df["close"] > df["sup_level_4h"])
       )
     )
 
@@ -27656,7 +27669,7 @@ class NostalgiaForInfinityX4(IStrategy):
     current_time: "datetime",
     enter_tags,
   ) -> tuple:
-    if len(filled_exits) > 30 and profit_init_ratio > 1.0:
+    if profit_init_ratio > 1.0:
       return True, f"exit_{self.long_grind_mode_name}_g"
     return False, None
 
