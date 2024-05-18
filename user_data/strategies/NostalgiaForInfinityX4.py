@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.735"
+    return "v14.1.737"
 
   stoploss = -0.99
 
@@ -14149,6 +14149,15 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["ema_200_dec_48_1h"] == False)
         | (df["close"] > (df["high_max_12_1d"] * 0.50))
       )
+      & (
+        (df["change_pct_4h"] < 0.04)
+        | (df["rsi_3"] > 10.0)
+        | (df["rsi_14_15m"] < 46.0)
+        | (df["rsi_14_1h"] < 50.0)
+        | (df["rsi_14_4h"] < 50.0)
+        | (df["ema_200_dec_4_1d"] == False)
+        | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
+      )
     )
 
     # Global protections
@@ -25399,6 +25408,8 @@ class NostalgiaForInfinityX4(IStrategy):
         # Condition #52 - Quick mode (Long).
         if index == 52:
           # Protections
+          long_entry_logic.append(df["global_protections_long_pump"] == True)
+          long_entry_logic.append(df["global_protections_long_dump"] == True)
           long_entry_logic.append(df["hl_pct_change_6_1h"] < 0.60)
           long_entry_logic.append(df["hl_pct_change_12_1h"] < 0.70)
           long_entry_logic.append(df["hl_pct_change_24_1h"] < 0.80)
