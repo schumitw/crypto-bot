@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.818"
+    return "v14.1.819"
 
   stoploss = -0.99
 
@@ -729,7 +729,7 @@ class NostalgiaForInfinityX4(IStrategy):
   entry_47_rsi_20_min = DecimalParameter(20.0, 40.0, default=24.0, decimals=0, space="buy", optimize=False)
   entry_47_rsi_20_max = DecimalParameter(26.0, 60.0, default=60.0, decimals=0, space="buy", optimize=False)
   entry_47_cti_20_max = DecimalParameter(-0.8, 0.8, default=-0.7, decimals=1, space="buy", optimize=False)
-  entry_47_ema_offset = DecimalParameter(0.980, 0.999, default=0.994, decimals=3, space="buy", optimize=False)
+  entry_47_ema_offset = DecimalParameter(0.980, 0.999, default=0.992, decimals=3, space="buy", optimize=False)
   entry_47_high_max_12_1h_max = DecimalParameter(00.70, 0.95, default=0.88, decimals=2, space="buy", optimize=False)
 
   entry_48_close_max_12 = DecimalParameter(00.50, 0.95, default=0.80, decimals=2, space="buy", optimize=False)
@@ -14889,6 +14889,7 @@ class NostalgiaForInfinityX4(IStrategy):
     time_in_force: str,
     current_time: datetime,
     entry_tag: Optional[str],
+    side: str,
     **kwargs,
   ) -> bool:
     # allow force entries
@@ -14921,10 +14922,10 @@ class NostalgiaForInfinityX4(IStrategy):
         # The pair is not in the list of grind mode allowed
         return False
 
-    if rate > df["close"]:
+    if ("side" == "long" and rate > df["close"]) or ("side" == "short" and rate < df["close"]):
       slippage = (rate / df["close"]) - 1.0
 
-      if slippage < self.max_slippage:
+      if ("side" == "long" and slippage < self.max_slippage) or ("side" == "short" and slippage > -self.max_slippage):
         return True
       else:
         log.warning(f"Cancelling buy for {pair} due to slippage {(slippage * 100.0):.2f}%")
