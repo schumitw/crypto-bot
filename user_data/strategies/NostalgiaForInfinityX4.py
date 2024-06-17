@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.842"
+    return "v14.1.843"
 
   stoploss = -0.99
 
@@ -14785,6 +14785,21 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["sma_200_dec_48_1h"] == False)
         | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
       )
+      & (
+        (df["change_pct_1h"] > -0.01)
+        | (df["not_downtrend_1h"])
+        | (df["is_downtrend_3_1h"] == False)
+        | (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3_15m"] > 12.0)
+        | (df["rsi_3_1h"] > 20.0)
+        | (df["close"] > df["sup_level_1h"])
+        | (df["close"] > df["sup_level_4h"])
+        | (df["close"] > df["sup_level_1d"])
+        | (df["sma_200_dec_48_1h"] == False)
+        | (df["ema_200_dec_24_4h"] == False)
+        | (df["ema_200_dec_4_1d"] == False)
+      )
     )
 
     # Global protections
@@ -16107,6 +16122,21 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["rsi_3_15m"] > 30.0)
             | (df["rsi_3_1h"] > 20.0)
             | (df["close"] > df["sup_level_1h"])
+          )
+          long_entry_logic.append(
+            (df["change_pct_1h"] > -0.01)
+            | (df["not_downtrend_1h"])
+            | (df["is_downtrend_3_1h"] == False)
+            | (df["rsi_14"] > df["rsi_14"].shift(12))
+            | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+            | (df["rsi_3_15m"] > 12.0)
+            | (df["rsi_3_1h"] > 20.0)
+            | (df["close"] > df["sup_level_1h"])
+            | (df["close"] > df["sup_level_4h"])
+            | (df["close"] > df["sup_level_1d"])
+            | (df["sma_200_dec_48_1h"] == False)
+            | (df["ema_200_dec_24_4h"] == False)
+            | (df["ema_200_dec_4_1d"] == False)
           )
 
           # Logic
