@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.905"
+    return "v14.1.906"
 
   stoploss = -0.99
 
@@ -16675,6 +16675,15 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["ema_200_dec_24_4h"] == False)
             | (df["ema_200_dec_4_1d"] == False)
           )
+          long_entry_logic.append(
+            (df["rsi_3"] > 16.0)
+            | (df["rsi_3_15m"] > 30.0)
+            | (df["rsi_14_1h"] < 60.0)
+            | (df["rsi_14_4h"] < 65.0)
+            | (df["rsi_14_1d"] < 65.0)
+            | (df["r_480_1h"] < -35.0)
+            | (df["ema_200_dec_4_1d"] == False)
+          )
 
           # Logic
           long_entry_logic.append(df["cti_20"] < -0.75)
@@ -30304,7 +30313,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -30441,7 +30450,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -30587,7 +30596,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -30792,7 +30801,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -30965,7 +30974,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -31138,7 +31147,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -31311,7 +31320,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -31484,7 +31493,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -31663,7 +31672,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -32572,7 +32581,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -32746,7 +32755,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -32890,7 +32899,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -33043,7 +33052,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -33186,7 +33195,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit < -0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit < -0.03))
+        # and ((num_open_grinds == 0) or (slice_profit < -0.03))
         and (
           (last_candle["protections_long_rebuy"] == True)
           and (last_candle["protections_long_global"] == True)
@@ -41273,7 +41282,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -41410,7 +41419,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -41556,7 +41565,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -41758,7 +41767,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -41928,7 +41937,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -42098,7 +42107,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -42268,7 +42277,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -42438,7 +42447,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -42614,7 +42623,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -43506,7 +43515,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -43644,7 +43653,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -43752,7 +43761,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -43870,7 +43879,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
@@ -43978,7 +43987,7 @@ class NostalgiaForInfinityX4(IStrategy):
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
           or (slice_profit > 0.06)
         )
-        and ((num_open_grinds == 0) or (slice_profit > 0.03))
+        # and ((num_open_grinds == 0) or (slice_profit > 0.03))
         and (
           (last_candle["protections_short_rebuy"] == True)
           and (last_candle["protections_short_global"] == True)
