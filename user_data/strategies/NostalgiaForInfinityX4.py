@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.935"
+    return "v14.1.936"
 
   stoploss = -0.99
 
@@ -12591,6 +12591,21 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["close"] < df["res_hlevel_4h"])
         | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
       )
+      & (
+        (df["rsi_14"] > df["rsi_14"].shift(12))
+        | (df["rsi_14_15m"] > df["rsi_14_15m"].shift(12))
+        | (df["rsi_3"] > 16.0)
+        | (df["rsi_3_15m"] > 16.0)
+        | (df["rsi_14_1h"] < 50.0)
+        | (df["cti_20_1h"] < 0.7)
+        | (df["rsi_14_4h"] < 50.0)
+        | (df["rsi_14_1d"] < 50.0)
+        | (df["rsi_14_max_6_1d"] < 80.0)
+        | (df["close"] > df["sup_level_1h"])
+        | (df["close"] < df["res_hlevel_4h"])
+        | (df["hl_pct_change_6_1d"] < 1.9)
+        | (((df["close"] - df["low_min_48_1h"]) / df["low_min_48_1h"]) < (df["hl_pct_change_48_1h"] * 0.38))
+      )
     )
 
     df["global_protections_long_dump"] = (
@@ -15320,6 +15335,20 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["sma_200_dec_48_1h"] == False)
         | (df["ema_200_dec_48_1h"] == False)
       )
+      & (
+        (df["change_pct_1d"] > -0.04)
+        | (df["top_wick_pct_1d"] < 0.04)
+        | (df["change_pct_1d"].shift(288) < 0.24)
+        | (df["not_downtrend_1h"])
+        | (df["rsi_3"] > 20.0)
+        | (df["rsi_3_15m"] > 20.0)
+        | (df["rsi_14_15m"] < 36.0)
+        | (df["rsi_14_1h"] < 40.0)
+        | (df["rsi_14_4h"] < 40.0)
+        | (df["r_480_1h"] > -65.0)
+        | (df["sma_200_dec_48_1h"] == False)
+        | (df["ema_200_dec_48_1h"] == False)
+      )
     )
 
     # Global protections
@@ -16990,6 +17019,20 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["r_480_1h"] > -65.0)
             | (df["close"] > df["sup_level_1h"])
             | (df["close"] > df["sup_level_4h"])
+            | (df["sma_200_dec_48_1h"] == False)
+            | (df["ema_200_dec_48_1h"] == False)
+          )
+          long_entry_logic.append(
+            (df["change_pct_1d"] > -0.04)
+            | (df["top_wick_pct_1d"] < 0.04)
+            | (df["change_pct_1d"].shift(288) < 0.24)
+            | (df["not_downtrend_1h"])
+            | (df["rsi_3"] > 20.0)
+            | (df["rsi_3_15m"] > 20.0)
+            | (df["rsi_14_15m"] < 36.0)
+            | (df["rsi_14_1h"] < 40.0)
+            | (df["rsi_14_4h"] < 40.0)
+            | (df["r_480_1h"] > -65.0)
             | (df["sma_200_dec_48_1h"] == False)
             | (df["ema_200_dec_48_1h"] == False)
           )
