@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.1.984"
+    return "v14.1.985"
 
   stoploss = -0.99
 
@@ -296,11 +296,11 @@ class NostalgiaForInfinityX4(IStrategy):
   regular_mode_grind_5_thresholds_spot = [-0.03, -0.10, -0.12]
   regular_mode_grind_5_stop_grinds_spot = -0.20
   regular_mode_grind_5_profit_threshold_spot = 0.048
-  regular_mode_derisk_1_spot = -0.80
-  regular_mode_derisk_1_spot_old = -0.80
+  regular_mode_derisk_1_spot = -2.0
+  regular_mode_derisk_1_spot_old = -2.0
   regular_mode_derisk_1_reentry_spot = -0.08
-  regular_mode_derisk_spot = -1.60
-  regular_mode_derisk_spot_old = -1.60
+  regular_mode_derisk_spot = -4.0
+  regular_mode_derisk_spot_old = -4.0
 
   regular_mode_rebuy_stakes_futures = [0.10, 0.10, 0.10]
   regular_mode_rebuy_thresholds_futures = [-0.12, -0.14, -0.16]
@@ -324,11 +324,11 @@ class NostalgiaForInfinityX4(IStrategy):
   regular_mode_grind_5_thresholds_futures = [-0.03, -0.10, -0.12]
   regular_mode_grind_5_stop_grinds_futures = -0.20
   regular_mode_grind_5_profit_threshold_futures = 0.048
-  regular_mode_derisk_1_futures = -2.40
-  regular_mode_derisk_1_futures_old = -2.40
+  regular_mode_derisk_1_futures = -4.0
+  regular_mode_derisk_1_futures_old = -4.0
   regular_mode_derisk_1_reentry_futures = -0.08  # without leverage
-  regular_mode_derisk_futures = -3.20
-  regular_mode_derisk_futures_old = -3.20
+  regular_mode_derisk_futures = -8.0
+  regular_mode_derisk_futures_old = -8.0
 
   # Rebuy mode
   rebuy_mode_stake_multiplier = 0.2
@@ -15483,6 +15483,20 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["close"] > df["sup_level_4h"])
         | (df["close"] > df["sup_level_1d"])
       )
+      & (
+        (df["change_pct_1d"] > -0.08)
+        | (df["not_downtrend_1h"])
+        | (df["not_downtrend_1d"])
+        | (df["rsi_3"] > 30.0)
+        | (df["rsi_3_1h"] > 36.0)
+        | (df["rsi_3_1d"] > 36.0)
+        | (df["rsi_14_15m"] < 36.0)
+        | (df["rsi_14_1d"] < 40.0)
+        | (df["r_480_1h"] > -85.0)
+        | (df["close"] > df["sup_level_1h"])
+        | (df["close"] > df["sup_level_4h"])
+        | (df["close"] > df["sup_level_1d"])
+      )
     )
 
     # Global protections
@@ -17379,6 +17393,19 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["close"] > df["sup_level_1d"])
             | (df["ema_200_dec_24_4h"] == False)
             | (df["ema_200_dec_4_1d"] == False)
+          )
+          long_entry_logic.append(
+            (df["change_pct_1d"] > -0.08)
+            | (df["not_downtrend_1h"])
+            | (df["not_downtrend_1d"])
+            | (df["rsi_3_1h"] > 36.0)
+            | (df["rsi_3_1d"] > 36.0)
+            | (df["rsi_14_15m"] < 36.0)
+            | (df["rsi_14_1d"] < 40.0)
+            | (df["r_480_1h"] > -85.0)
+            | (df["close"] > df["sup_level_1h"])
+            | (df["close"] > df["sup_level_4h"])
+            | (df["close"] > df["sup_level_1d"])
           )
 
           # Logic
