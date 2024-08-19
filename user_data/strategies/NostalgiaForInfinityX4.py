@@ -68,7 +68,7 @@ class NostalgiaForInfinityX4(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v14.2.1"
+    return "v14.2.3"
 
   stoploss = -0.99
 
@@ -16414,6 +16414,30 @@ class NostalgiaForInfinityX4(IStrategy):
         | (df["close"] < df["res_hlevel_4h"])
         | (df["close"] < df["res_hlevel_1d"])
       )
+      & (
+        (df["change_pct_4h"] < 0.08)
+        | (df["rsi_3"] < 80.0)
+        | (df["rsi_3_15m"] < 80.0)
+        | (df["rsi_3_4h"] < 95.0)
+        | (df["close"] < df["res_hlevel_1h"])
+        | (df["close"] < df["res_hlevel_4h"])
+        | (df["close"] < df["res_hlevel_1d"])
+      )
+      & (
+        (df["change_pct_1d"] < 0.26)
+        | (df["change_pct_1h"] < 0.02)
+        | (df["rsi_3"] < 80.0)
+        | (df["rsi_3_15m"] < 80.0)
+        | (df["rsi_3_1h"] < 75.0)
+        | (df["rsi_14"] > 80.0)
+        | (df["rsi_14_15m"] > 70.0)
+        | (df["rsi_14_1d"] > 80.0)
+        | (df["rsi_14_1d"].shift(288) > 45.0)
+        | (df["r_480_1h"] < -20.0)
+        | (df["close"] < df["res_hlevel_1h"])
+        | (df["close"] < df["res_hlevel_4h"])
+        | (df["close"] < df["res_hlevel_1d"])
+      )
     )
 
     df["global_protections_short_dump"] = (
@@ -18207,6 +18231,16 @@ class NostalgiaForInfinityX4(IStrategy):
             | (df["rsi_14_max_6_1d"] < 70.0)
             | (df["cti_20_1d"] < 0.8)
             | (df["hl_pct_change_6_1d"] < 0.9)
+          )
+          long_entry_logic.append(
+            (df["change_pct_1d"] < 0.24)
+            | (df["change_pct_4h"] < 0.06)
+            | (df["top_wick_pct_4h"] < 0.06)
+            | (df["change_pct_1h"] > -0.02)
+            | (df["rsi_14_15m"] < 40.0)
+            | (df["rsi_14_1h"] < 50.0)
+            | (df["rsi_14_4h"] < 80.0)
+            | (df["r_480_1h"] < -35.0)
           )
 
           # Logic
